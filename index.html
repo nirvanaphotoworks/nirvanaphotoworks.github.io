@@ -1,61 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Nirvana Photoworks</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Nirvana Photoworks</title>
+
+    <!-- Favicon (add later if needed)
+    <link rel="icon" type="image/png" href="favicon.png">
+    -->
+
     <style>
+        :root {
+            --black: #0b0b0b;
+            --gold: #c9a24e;
+            --dark: #111;
+            --gray: #b5b5b5;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #111;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: var(--black);
             color: white;
         }
 
         header {
-            background: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a, #000);
+        }
+
+        header h1 {
+            font-size: 54px;
+            letter-spacing: 2px;
+            margin: 0;
+            color: var(--gold);
+            font-weight: 300;
+        }
+
+        header p {
+            margin-top: 15px;
+            font-size: 18px;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 25px auto;
+        }
+
+        section {
             padding: 80px 20px;
             text-align: center;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 40px;
+        h2 {
+            color: var(--gold);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
         }
 
-        header p {
-            color: #ccc;
-            margin-top: 10px;
+        .about p {
+            max-width: 700px;
+            margin: auto;
+            color: var(--gray);
+            line-height: 1.7;
         }
 
-        .section {
-            padding: 50px 20px;
-            text-align: center;
-            background: #181818;
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
 
-        .section:nth-child(even) {
-            background: #111;
-        }
-
-        img {
+        .gallery img {
             width: 280px;
-            margin: 10px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(201,162,78,0.3);
+            transition: 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+            border-color: var(--gold);
+        }
+
+        .contact-box {
+            display: inline-block;
+            padding: 25px 35px;
+            border: 1px solid var(--gold);
             border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .contact-box p {
+            margin: 10px 0;
+            color: var(--gray);
+        }
+
+        .contact-box b {
+            color: var(--gold);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: #000;
-            color: #888;
-        }
-
-        .contact-box {
-            background: #222;
-            display: inline-block;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid rgba(201,162,78,0.2);
         }
     </style>
 </head>
@@ -63,35 +127,40 @@
 <body>
 
 <header>
-    <h1>Nirvana Photoworks</h1>
+    <h1>NIRVANA PHOTOWORKS</h1>
+    <div class="divider"></div>
     <p>Capturing Your Precious Memories</p>
 </header>
 
-<div class="section">
-    <h2>About</h2>
+<section class="about">
+    <h2>ABOUT</h2>
     <p>
-        Professional photography focused on capturing real emotions, timeless memories, and creative storytelling.
+        We are a professional photography studio focused on capturing timeless emotions,
+        elegant portraits, weddings, events, and cinematic storytelling. Every frame is
+        crafted with intention, detail, and artistry.
     </p>
-</div>
+</section>
 
-<div class="section">
-    <h2>Gallery</h2>
-    <img src="https://via.placeholder.com/280x200">
-    <img src="https://via.placeholder.com/280x200">
-    <img src="https://via.placeholder.com/280x200">
-</div>
-
-<div class="section">
-    <h2>Contact</h2>
-
-    <div class="contact-box">
-        <p>Email: contact.nirvanaphotoworks@gmail.com</p>
-        <p>Phone: +1 226-507-6040</p>
+<section>
+    <h2>GALLERY</h2>
+    <div class="gallery">
+        <img src="https://via.placeholder.com/600x400">
+        <img src="https://via.placeholder.com/600x400">
+        <img src="https://via.placeholder.com/600x400">
+        <img src="https://via.placeholder.com/600x400">
     </div>
-</div>
+</section>
+
+<section>
+    <h2>CONTACT</h2>
+    <div class="contact-box">
+        <p><b>Email:</b> contact.nirvanaphotoworks@gmail.com</p>
+        <p><b>Phone:</b> +1 226-507-6040</p>
+    </div>
+</section>
 
 <footer>
-    © 2026 Nirvana Photoworks
+    © 2026 Nirvana Photoworks • All Rights Reserved
 </footer>
 
 </body>
