@@ -32,20 +32,21 @@
     h2 {
         text-align: center;
         color: #c9a24e;
-        padding: 25px;
+        padding: 30px;
         font-weight: 300;
         letter-spacing: 2px;
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .gallery {
+        display: flex;
+        justify-content: center;
         gap: 15px;
-        padding: 30px;
+        flex-wrap: wrap;
+        padding: 20px;
     }
 
-    .grid img {
-        width: 100%;
+    .gallery img {
+        width: 300px;
         height: 220px;
         object-fit: cover;
         border-radius: 10px;
@@ -54,9 +55,8 @@
         transition: 0.3s;
     }
 
-    .grid img:hover {
+    .gallery img:hover {
         transform: scale(1.03);
-        border-color: #c9a24e;
     }
 
     /* LIGHTBOX */
@@ -70,8 +70,8 @@
         background: rgba(0,0,0,0.95);
         justify-content: center;
         align-items: center;
-        z-index: 999;
         flex-direction: column;
+        z-index: 999;
     }
 
     .lightbox img {
@@ -95,7 +95,7 @@
 
     .close {
         position: absolute;
-        top: 15px;
+        top: 20px;
         right: 25px;
         font-size: 35px;
         color: #c9a24e;
@@ -118,7 +118,7 @@
 
 <h2>Family Photography</h2>
 
-<div class="grid">
+<div class="gallery">
     <img src="images/family/1.jpg">
     <img src="images/family/2.jpg">
     <img src="images/family/3.jpg">
@@ -145,13 +145,13 @@ const images = [
 
 let currentIndex = 0;
 
-const gridImgs = document.querySelectorAll(".grid img");
+const imgs = document.querySelectorAll(".gallery img");
 
-gridImgs.forEach((img, index) => {
-    img.onclick = () => {
+imgs.forEach((img, index) => {
+    img.addEventListener("click", () => {
         currentIndex = index;
         openLightbox();
-    };
+    });
 });
 
 function openLightbox() {
