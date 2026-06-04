@@ -2,8 +2,57 @@
 <html>
 <head>
     <title>Family - Nirvana Photoworks</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: white;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px;
+            background: #000;
+        }
+
+        .nav a {
+            color: #c9a24e;
+            text-decoration: none;
+        }
+
+        h2 {
+            text-align: center;
+            color: #c9a24e;
+            padding: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 30px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .debug {
+            text-align: center;
+            color: gray;
+            font-size: 14px;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="nav">
@@ -16,14 +65,16 @@
     <a href="contact.html">Contact</a>
 </div>
 
-<h2 style="text-align:center; color:#c9a24e; padding:40px;">
-    Family Photography
-</h2>
+<h2>Family Photography</h2>
 
 <div class="grid">
-    <img src="images/family/1.jpg">
-    <img src="images/family/2.jpg">
-    <img src="images/family/3.jpg">
+    <img src="images/family/1.jpg" onerror="this.style.display='none'">
+    <img src="images/family/2.jpg" onerror="this.style.display='none'">
+    <img src="images/family/3.jpg" onerror="this.style.display='none'">
+</div>
+
+<div class="debug">
+    If you see this text, page is working. Images may be missing or misnamed.
 </div>
 
 </body>
