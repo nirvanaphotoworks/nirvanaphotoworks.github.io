@@ -1,56 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Family - Nirvana Photoworks</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b0b0b;
-            color: white;
-        }
+<title>Family - Nirvana Photoworks</title>
 
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            padding: 20px;
-            background: #000;
-        }
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0b0b;
+        color: white;
+    }
 
-        .nav a {
-            color: #c9a24e;
-            text-decoration: none;
-        }
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        background: #000;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
 
-        h2 {
-            text-align: center;
-            color: #c9a24e;
-            padding: 30px;
-        }
+    .nav a {
+        color: #c9a24e;
+        text-decoration: none;
+        font-size: 14px;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            padding: 30px;
-        }
+    h2 {
+        text-align: center;
+        color: #c9a24e;
+        padding: 30px 20px;
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
 
-        img {
-            width: 100%;
-            border-radius: 10px;
-        }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 30px;
+    }
 
-        .debug {
-            text-align: center;
-            color: gray;
-            font-size: 14px;
-            padding: 10px;
-        }
-    </style>
+    .grid img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 1px solid rgba(201,162,78,0.3);
+        transition: 0.3s ease;
+    }
+
+    .grid img:hover {
+        transform: scale(1.03);
+        border-color: #c9a24e;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.92);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(201,162,78,0.4);
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 35px;
+        color: #c9a24e;
+        cursor: pointer;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        border-top: 1px solid rgba(201,162,78,0.2);
+        margin-top: 40px;
+    }
+</style>
 </head>
 
 <body>
@@ -68,14 +117,31 @@
 <h2>Family Photography</h2>
 
 <div class="grid">
-    <img src="images/family/1.jpg" onerror="this.style.display='none'">
-    <img src="images/family/2.jpg" onerror="this.style.display='none'">
-    <img src="images/family/3.jpg" onerror="this.style.display='none'">
+    <img src="images/family/1.jpg" onclick="openImg(this.src)">
+    <img src="images/family/2.jpg" onclick="openImg(this.src)">
+    <img src="images/family/3.jpg" onclick="openImg(this.src)">
 </div>
 
-<div class="debug">
-    If you see this text, page is working. Images may be missing or misnamed.
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeImg()">×</span>
+    <img id="lightbox-img">
 </div>
+
+<footer>
+    © 2026 Nirvana Photoworks
+</footer>
+
+<script>
+function openImg(src) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = src;
+}
+
+function closeImg() {
+    document.getElementById("lightbox").style.display = "none";
+}
+</script>
 
 </body>
 </html>
