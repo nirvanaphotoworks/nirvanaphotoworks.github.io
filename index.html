@@ -11,7 +11,7 @@
 :root {
     --bg-dark: #0a0a0a;
     --bg-card: #121212;
-    --accent: #d4af37; /* Refined luxury champagne gold */
+    --accent: #d4af37; /* Luxury champagne gold */
     --text-main: #f5f5f5;
     --text-muted: #a0a0a0;
     --font-serif: 'Cormorant Garamond', serif;
@@ -34,7 +34,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* --- PREMIUM NAVIGATION --- */
+/* --- PREMIUM NAVIGATION WITH FIXED LOGO VISIBILITY --- */
 .nav {
     position: fixed;
     top: 0;
@@ -43,30 +43,55 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px 8%; /* Deeper padding for breathing room */
-    background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%);
+    padding: 30px 8%;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
 }
 
-.nav-brand {
-    font-family: var(--font-serif);
-    font-size: 26px; /* Stronger branding presence */
-    letter-spacing: 5px;
-    color: var(--text-main);
+/* High visibility brand block */
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     text-decoration: none;
-    font-weight: 400;
+}
+
+.nav-logo {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: #111; /* Fallback frame visible if your image link breaks */
+    display: block;
     transition: var(--transition);
 }
 
-.nav-brand:hover {
+.nav-brand {
+    font-family: var(--font-serif);
+    font-size: 26px; 
+    letter-spacing: 5px;
+    color: var(--text-main);
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.brand-wrapper:hover .nav-brand {
     color: var(--accent);
+}
+
+.brand-wrapper:hover .nav-logo {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212,175,55,0.3);
 }
 
 .nav-links {
     display: flex;
     gap: 40px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -85,7 +110,6 @@ body {
     color: var(--accent);
 }
 
-/* Elegant underline hover effect */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -106,12 +130,11 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
-    padding: 140px 8% 0 8%; /* Pushes content safely down past the fixed header */
+    padding: 140px 8% 0 8%;
     position: relative;
     background: radial-gradient(circle at 80% 50%, #161616 0%, #0a0a0a 100%);
 }
 
-/* Decorative background light element for depth */
 .hero::before {
     content: '';
     position: absolute;
@@ -227,7 +250,6 @@ body {
     margin: 0 auto;
 }
 
-/* Custom asymmetrical grid mapping for premium editorial feel */
 .portfolio-card {
     position: relative;
     background: var(--bg-card);
@@ -241,14 +263,12 @@ body {
     border: 1px solid rgba(255,255,255,0.03);
 }
 
-/* Alternating sizes for visual rhythm */
 .portfolio-card:nth-child(1) { grid-column: span 3; }
 .portfolio-card:nth-child(2) { grid-column: span 3; }
 .portfolio-card:nth-child(3) { grid-column: span 2; }
 .portfolio-card:nth-child(4) { grid-column: span 2; }
 .portfolio-card:nth-child(5) { grid-column: span 2; }
 
-/* Elegant Hover Overlays */
 .portfolio-card::before {
     content: '';
     position: absolute;
@@ -261,7 +281,6 @@ body {
     transition: var(--transition);
 }
 
-/* Dynamic background simulation */
 .portfolio-card::after {
     content: '';
     position: absolute;
@@ -362,7 +381,7 @@ footer a:hover {
 
 @media (max-width: 768px) {
     .nav { padding: 20px 4%; }
-    .nav-links { display: none; } /* Hide raw flat menu items on mobile for clean screen spacing */
+    .nav-links { display: none; } 
     .hero { padding: 120px 6% 0 6%; }
     .portfolio-card:nth-child(1),
     .portfolio-card:nth-child(2),
@@ -377,7 +396,10 @@ footer a:hover {
 <body>
 
 <nav class="nav">
-    <a href="index.html" class="nav-brand">NIRVANA</a>
+    <a href="index.html" class="brand-wrapper">
+        <img src="images/logo.jpeg" alt="Nirvana Logo" class="nav-logo">
+        <span class="nav-brand">NIRVANA</span>
+    </a>
     <div class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="gallery.html">Gallery</a>
