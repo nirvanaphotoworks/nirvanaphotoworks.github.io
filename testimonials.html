@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — Nirvana Photoworks</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* --- GLOBAL RESET & VARIABLES --- */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #080808; --warm-dark: #141210; --gold: #c4a46b; 
+    --ivory: #f2ead8; --ivory-dim: rgba(242,234,216,0.65); 
+    --thin: rgba(196,164,107,0.15);
+  }
+  body { background: var(--black); color: var(--ivory); font-family: 'DM Sans', sans-serif; cursor: none; overflow-x: hidden; }
+
+  /* --- NAVIGATION --- */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 30px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,8,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--thin); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: var(--ivory-dim); text-decoration: none; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; transition: 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { color: var(--gold) !important; border: 1px solid var(--gold); padding: 8px 20px; }
+
+  /* --- HERO SECTION --- */
+  .hero { padding: 200px 60px 100px; text-align: center; }
+  .eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 70px); color: var(--ivory); font-weight: 300; }
+
+  /* --- TESTIMONIAL GRID --- */
+  .grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 30px; 
+    padding: 0 60px 100px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+  }
+  .card { 
+    padding: 50px; 
+    border: 1px solid var(--thin); 
+    background: linear-gradient(135deg, rgba(20, 18, 16, 0.6), rgba(8, 8, 8, 0.4));
+    transition: 0.5s ease;
+  }
+  .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+  .quote { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.6; color: var(--ivory-dim); margin-bottom: 25px; font-style: italic; }
+  .name { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+
+  /* --- WHATSAPP BADGE --- */
+  .whatsapp-float { 
+    position: fixed; bottom: 40px; right: 40px; z-index: 4000; 
+    display: flex; align-items: center; gap: 14px; padding: 16px 28px; 
+    background: var(--black); border: 1px solid var(--thin); 
+    text-decoration: none; color: var(--ivory); font-size: 11px; 
+    letter-spacing: 2px; text-transform: uppercase; transition: 0.4s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .whatsapp-float:hover { border-color: #25D366; background: rgba(37, 211, 102, 0.05); }
+  .whatsapp-float svg { width: 28px; height: 28px; filter: drop-shadow(0px 0px 4px rgba(37, 211, 102, 0.3)); }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px; }
+    .grid { grid-template-columns: 1fr; padding: 0 20px 80px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="images/logo.jpeg" alt="Logo" style="height: 40px;">
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Book Session</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Client Experiences</div>
+  <h1 class="title">Kind <em>Words</em></h1>
+</header>
+
+<section class="grid">
+  <div class="card">
+    <p class="quote">"I can't thank Nirvana Photoworks enough for capturing our newborn son so beautifully! She was so patient and kind, even while adapting poses, lighting, and timing to work around his needs. She never rushed us and treated my little one with such gentle care. The photos are pure magic; I am beyond words."</p>
+    <div class="name">— Cristina and James</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"Nirvana Photoworks did a wonderful job. My partner and I are so happy to have these memories. Even though we didn't know how to pose, she explained everything to us, and the photos came out natural and wonderful. She is incredibly patient and friendly."</p>
+    <div class="name">— Naomi Sotelo</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"A super fun session and the best one we've had to date. The pictures are absolutely gorgeous."</p>
+    <div class="name">— Divya and Family</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"Madhura is very professional and fun to work with. She went above and beyond to schedule a second shoot to ensure I was satisfied. She even provided the props and directed our poses. I highly recommend her!"</p>
+    <div class="name">— Satisfied Client</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"Thank you for capturing our family and for being so patient. You knew exactly what we were looking for and captured the perfect pictures."</p>
+    <div class="name">— Russ and Stephanie</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"We had such a great experience with Nirvana Photoworks! The team was friendly, patient, and made us feel completely at ease—especially the kids. They were incredibly helpful with the prep work, and our photos turned out beautifully. I really appreciate the eye for detail. Highly recommended!"</p>
+    <div class="name">— Nivedha and Raja</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"Madhu is very passionate and creative. She captures precious moments and smiles through her lens beautifully."</p>
+    <div class="name">— Kavya Reddy and Santhosh</div>
+  </div>
+
+  <div class="card">
+    <p class="quote">"We booked Nirvana Photoworks for a family session, and the experience was amazing from start to finish. The photographer was patient and friendly, making everyone feel comfortable—even our kids, who usually don't sit still! The photos are natural, warm, and full of genuine moments. The editing style is elegant, and we received our gallery quickly."</p>
+    <div class="name">— Rakesh Chandar</div>
+  </div>
+</section>
+
+<a class="whatsapp-float" href="https://wa.me/13413459974" target="_blank">
+  <svg viewBox="0 0 24 24" style="fill: #25D366;">
+    <path d="M12.031 6.172c-3.187 0-5.782 2.594-5.782 5.782 0 1.02.268 2.016.78 2.89l-1.02 3.722 3.812-1.001c.839.458 1.782.702 2.748.702h.004c3.187 0 5.78-2.593 5.78-5.78 0-3.187-2.593-5.782-5.78-5.782zm0 10.748h-.003c-.876 0-1.734-.236-2.484-.682l-.178-.107-1.85.485.494-1.803-.116-.188c-.489-.792-.746-1.706-.746-2.642 0-2.836 2.308-5.143 5.144-5.143 2.835 0 5.143 2.307 5.143 5.143s-2.308 5.143-5.144 5.143zm2.812-3.834c-.154-.077-.912-.45-1.053-.502-.141-.051-.243-.077-.345.077s-.396.502-.486.604-.178.116-.331.039-.643-.237-1.226-.757c-.453-.404-.759-.903-.848-1.056-.089-.153-.01-.235.067-.311.069-.069.154-.18.231-.27.077-.09.103-.154.154-.257s.026-.18-.013-.257c-.039-.077-.345-.832-.473-1.139-.126-.301-.256-.26-.345-.265-.089-.004-.191-.005-.293-.005s-.269.038-.41.192c-.141.154-.538.526-.538 1.282s.371 1.488.422 1.565c.051.077.728 1.112 1.764 1.56.247.106.44.17.591.217.248.079.474.068.653.041.2-.03.613-.25.699-.492.086-.242.086-.449.06-.492-.026-.042-.096-.067-.249-.144z"/>
+  </svg>
+  <span>Chat on WhatsApp</span>
+</a>
+
+</body>
+</html>
