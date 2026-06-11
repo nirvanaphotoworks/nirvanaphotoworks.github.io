@@ -125,19 +125,21 @@
 
   /* PAGE HERO */
   .page-hero {
-    height: 52vh;
-    min-height: 380px;
+    height: 45vh;
+    min-height: 320px;
     display: flex;
     align-items: flex-end;
     position: relative;
     overflow: hidden;
-    padding: 0 60px 72px 100px;
+    padding: 0 60px 50px 60px;
+    text-align: center;
+    justify-content: center;
   }
   .page-hero-bg {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 60% at 70% 40%, rgba(50,38,16,0.5) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(50,38,16,0.35) 0%, transparent 70%),
       linear-gradient(160deg, #0e0c09 0%, #080808 50%, #0d0b08 100%);
   }
   .page-hero-grain {
@@ -147,27 +149,19 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-size: 200px;
   }
-  .page-hero-rule {
-    position: absolute;
-    left: 60px; top: 50%;
-    transform: translateY(-50%);
-    width: 1px; height: 0;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-    animation: ruleGrow 1.8s cubic-bezier(0.16,1,0.3,1) 0.8s both;
-  }
-  @keyframes ruleGrow { to { height: 35vh; } }
   .page-hero-deco {
     position: absolute;
-    right: -1vw; top: 50%;
-    transform: translateY(-50%);
+    left: 50%; top: 45%;
+    transform: translate(-50%, -50%);
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(160px, 22vw, 340px);
+    font-size: clamp(180px, 25vw, 380px);
     font-weight: 300;
     color: transparent;
-    -webkit-text-stroke: 1px rgba(196,164,107,0.05);
+    -webkit-text-stroke: 1px rgba(196,164,107,0.03);
     line-height: 1;
     user-select: none;
     pointer-events: none;
+    z-index: 1;
     animation: fadeIn 2s ease 1.2s both;
   }
   .page-hero-strip {
@@ -183,22 +177,22 @@
     letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 20px;
-    display: flex;
+    margin-bottom: 16px;
+    display: inline-flex;
     align-items: center;
     gap: 16px;
   }
-  .page-hero-eyebrow::before {
+  .page-hero-eyebrow::before, .page-hero-eyebrow::after {
     content: '';
     display: block;
-    width: 40px; height: 1px;
+    width: 30px; height: 1px;
     background: var(--gold);
   }
   .page-hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 110px);
+    font-size: clamp(48px, 6.5vw, 90px);
     font-weight: 300;
-    line-height: 0.9;
+    line-height: 1;
     color: var(--ivory);
   }
   .page-hero-title em {
@@ -206,153 +200,35 @@
     color: var(--gold);
   }
 
-  /* CONTACT BODY */
-  .contact-body {
-    display: grid;
-    grid-template-columns: 1fr 1.55fr;
-    gap: 0;
-    max-width: 1400px;
+  /* CENTRALIZED FORM LAYOUT */
+  .contact-container {
+    max-width: 820px;
     margin: 0 auto;
-    padding: 120px 60px;
-    align-items: start;
+    padding: 100px 40px 140px 40px;
   }
-
-  /* LEFT — INFO COLUMN */
-  .contact-info { padding-right: 80px; padding-top: 8px; }
-
-  .info-label {
-    font-size: 9px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .info-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
-
-  .info-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 3.5vw, 50px);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--ivory);
-    margin-bottom: 28px;
-  }
-  .info-heading em { font-style: italic; color: var(--gold); }
-
-  .info-text {
-    font-size: 13px;
-    line-height: 2;
-    color: var(--ivory-dim);
-    margin-bottom: 60px;
-    max-width: 340px;
-  }
-
-  /* Contact detail blocks */
-  .contact-details { display: flex; flex-direction: column; gap: 0; }
-
-  .contact-detail-item {
-    padding: 28px 0;
-    border-top: 1px solid var(--thin);
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    transition: border-color 0.3s ease;
-  }
-  .contact-detail-item:last-child { border-bottom: 1px solid var(--thin); }
-  .contact-detail-item:hover { border-top-color: rgba(196,164,107,0.4); }
-
-  .detail-icon {
-    width: 36px; height: 36px;
-    border: 1px solid var(--thin);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .detail-icon svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-
-  .detail-label {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 6px;
-  }
-  .detail-value {
-    font-size: 14px;
-    color: var(--ivory-dim);
-    line-height: 1.6;
-    letter-spacing: 0.3px;
-  }
-  .detail-value a {
-    color: var(--ivory-dim);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .detail-value a:hover { color: var(--gold); }
-
-  /* Availability badge */
-  .availability-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 48px;
-    padding: 12px 20px;
-    border: 1px solid var(--thin);
-    background: rgba(196,164,107,0.03);
-  }
-  .badge-dot {
-    width: 6px; height: 6px;
-    background: #6fcf97;
-    border-radius: 50%;
-    animation: badgePulse 2s ease-in-out infinite;
-  }
-  @keyframes badgePulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .badge-text {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* DIVIDER LINE */
-  .contact-divider {
-    width: 1px;
-    background: linear-gradient(to bottom, transparent 5%, var(--thin) 30%, var(--thin) 70%, transparent 95%);
-    align-self: stretch;
-    position: relative;
-    left: 0;
-  }
-
-  /* RIGHT — FORM COLUMN */
-  .contact-form-wrap { padding-left: 80px; }
 
   .form-header {
-    margin-bottom: 48px;
+    text-align: center;
+    margin-bottom: 60px;
   }
   .form-header-label {
-    font-size: 9px;
-    letter-spacing: 5px;
+    font-size: 10px;
+    letter-spacing: 6px;
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     display: block;
   }
   .form-header-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: clamp(32px, 4vw, 46px);
     font-weight: 300;
+    line-height: 1.2;
     color: var(--ivory);
-    letter-spacing: 0.5px;
+  }
+  .form-header-title em {
+    font-style: italic;
+    color: var(--gold);
   }
 
   form { display: flex; flex-direction: column; gap: 0; }
@@ -447,7 +323,7 @@
 
   .form-field textarea {
     resize: none;
-    height: 140px;
+    height: 150px;
     padding-top: 42px;
   }
 
@@ -620,26 +496,13 @@
     transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.22s; }
-  .reveal-delay-3 { transition-delay: 0.34s; }
 
   /* RESPONSIVE */
-  @media (max-width: 1100px) {
-    .contact-body {
-      grid-template-columns: 1fr;
-      padding: 80px 40px;
-    }
-    .contact-info { padding-right: 0; margin-bottom: 64px; }
-    .contact-divider { display: none; }
-    .contact-form-wrap { padding-left: 0; }
-  }
   @media (max-width: 768px) {
     nav { padding: 22px 30px; }
     .nav-links { display: none; }
-    .page-hero { padding: 0 30px 60px 50px; }
-    .page-hero-rule { left: 24px; }
-    .contact-body { padding: 60px 24px; }
+    .page-hero { padding: 0 30px 40px 30px; }
+    .contact-container { padding: 60px 20px 100px 20px; }
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 48px 30px 30px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
@@ -654,11 +517,9 @@
 </head>
 <body>
 
-<!-- Cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-name">Nirvana</div>
@@ -672,11 +533,9 @@
   </ul>
 </nav>
 
-<!-- PAGE HERO -->
 <header class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="page-hero-grain"></div>
-  <div class="page-hero-rule"></div>
   <div class="page-hero-deco">C</div>
   <div class="page-hero-strip"></div>
   <div class="page-hero-content">
@@ -688,168 +547,90 @@
   </div>
 </header>
 
-<!-- CONTACT BODY -->
-<main class="contact-body">
+<main class="contact-container reveal">
 
-  <!-- LEFT — INFO -->
-  <div class="contact-info reveal">
-
-    <div class="info-label">Get In Touch</div>
-    <h2 class="info-heading">
-      Every great image<br>starts with a<br><em>conversation.</em>
-    </h2>
-    <p class="info-text">
-      We take on a limited number of sessions each month to ensure every client receives our full attention. Reach out &mdash; we would love to hear your story.
-    </p>
-
-    <div class="contact-details">
-
-      <div class="contact-detail-item">
-        <div class="detail-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <div class="detail-label">Email</div>
-          <div class="detail-value">
-            <a href="mailto:contact.nirvanaphotoworks@gmail.com">contact.nirvanaphotoworks@gmail.com</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-detail-item">
-        <div class="detail-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div>
-          <div class="detail-label">Phone</div>
-          <div class="detail-value">
-            <a href="tel:3413459974">341-345-9974</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-detail-item">
-        <div class="detail-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </div>
-        <div>
-          <div class="detail-label">Instagram</div>
-          <div class="detail-value">
-            <a href="https://instagram.com/nirvana_photoworks/" target="_blank">@nirvana_photoworks</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-detail-item">
-        <div class="detail-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <div class="detail-label">Based In</div>
-          <div class="detail-value">India &nbsp; &mdash; &nbsp; Available Worldwide</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="availability-badge">
-      <div class="badge-dot"></div>
-      <span class="badge-text">Accepting sessions for 2026</span>
-    </div>
-
+  <div class="form-header">
+    <span class="form-header-label">Booking Enquiry</span>
+    <h2 class="form-header-title">Every great image starts with a <em>conversation.</em></h2>
   </div>
 
-  <!-- VERTICAL DIVIDER -->
-  <div class="contact-divider"></div>
+  <form id="contact-form">
 
-  <!-- RIGHT — FORM -->
-  <div class="contact-form-wrap reveal reveal-delay-1">
-
-    <div class="form-header">
-      <span class="form-header-label">Booking Enquiry</span>
-      <div class="form-header-title">Tell us about your vision</div>
+    <div class="form-row">
+      <div class="form-field">
+        <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+        <label for="first_name">First Name</label>
+      </div>
+      <div class="form-field">
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+        <label for="last_name">Last Name</label>
+      </div>
     </div>
 
-    <form id="contact-form">
+    <div class="form-field">
+      <input type="email" name="email" id="email" placeholder="Email Address" required>
+      <label for="email">Email Address</label>
+    </div>
 
-      <div class="form-row">
-        <div class="form-field">
-          <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
-          <label for="first_name">First Name</label>
-        </div>
-        <div class="form-field">
-          <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
-          <label for="last_name">Last Name</label>
-        </div>
+    <div class="form-field">
+      <input type="tel" name="phone" id="phone" placeholder="Mobile Phone">
+      <label for="phone">Mobile Phone</label>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field select-wrap">
+        <select name="service" id="service" required>
+          <option value="" disabled selected></option>
+          <option>Portrait Session</option>
+          <option>Maternity</option>
+          <option>Newborn</option>
+          <option>Family</option>
+          <option>Event</option>
+          <option>Wedding</option>
+          <option>Engagement</option>
+          <option>Commercial</option>
+        </select>
+        <label for="service">Select Service</label>
       </div>
-
       <div class="form-field">
-        <input type="email" name="email" id="email" placeholder="Email Address" required>
-        <label for="email">Email Address</label>
+        <input type="date" name="event_date" id="event_date" placeholder="Session Date">
+        <label for="event_date">Preferred Date</label>
       </div>
+    </div>
 
+    <div class="form-row">
       <div class="form-field">
-        <input type="tel" name="phone" id="phone" placeholder="Mobile Phone">
-        <label for="phone">Mobile Phone</label>
+        <input type="text" name="location" id="location" placeholder="Location">
+        <label for="location">Location</label>
       </div>
-
-      <div class="form-row">
-        <div class="form-field select-wrap">
-          <select name="service" id="service" required>
-            <option value="" disabled selected></option>
-            <option>Portrait Session</option>
-            <option>Maternity</option>
-            <option>Newborn</option>
-            <option>Family</option>
-            <option>Event</option>
-            <option>Wedding</option>
-            <option>Engagement</option>
-            <option>Commercial</option>
-          </select>
-          <label for="service">Select Service</label>
-        </div>
-        <div class="form-field">
-          <input type="date" name="event_date" id="event_date" placeholder="Session Date">
-          <label for="event_date">Preferred Date</label>
-        </div>
+      <div class="form-field select-wrap">
+        <select name="referral" id="referral">
+          <option value="" disabled selected></option>
+          <option>Instagram</option>
+          <option>Google</option>
+          <option>Facebook</option>
+          <option>Word of Mouth</option>
+          <option>Other</option>
+        </select>
+        <label for="referral">How Did You Find Us?</label>
       </div>
+    </div>
 
-      <div class="form-row">
-        <div class="form-field">
-          <input type="text" name="location" id="location" placeholder="Location">
-          <label for="location">Location</label>
-        </div>
-        <div class="form-field select-wrap">
-          <select name="referral" id="referral">
-            <option value="" disabled selected></option>
-            <option>Instagram</option>
-            <option>Google</option>
-            <option>Facebook</option>
-            <option>Word of Mouth</option>
-            <option>Other</option>
-          </select>
-          <label for="referral">How Did You Find Us?</label>
-        </div>
-      </div>
+    <div class="form-field">
+      <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+      <label for="message">Your Message</label>
+    </div>
 
-      <div class="form-field">
-        <textarea name="message" id="message" placeholder="Your Message" required></textarea>
-        <label for="message">Your Message</label>
-      </div>
+    <div class="form-submit">
+      <button type="submit" class="btn-submit">
+        <span>Send Enquiry</span>
+      </button>
+    </div>
 
-      <div class="form-submit">
-        <button type="submit" class="btn-submit">
-          <span>Send Enquiry</span>
-        </button>
-      </div>
-
-    </form>
-
-  </div>
+  </form>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div>
@@ -895,7 +676,6 @@
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
 <a class="whatsapp-float"
    href="https://wa.me/13413459974?text=Hi%20Nirvana%20Photoworks%2C%20I%20would%20like%20to%20book%20a%20photoshoot."
    target="_blank">
@@ -905,10 +685,8 @@
   <span class="whatsapp-text">Chat on WhatsApp</span>
 </a>
 
-<!-- TOAST -->
 <div class="toast" id="toast">Message sent successfully</div>
 
-<!-- EMAILJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   // Cursor
@@ -950,7 +728,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
   reveals.forEach(el => observer.observe(el));
 
   // Toast helper
