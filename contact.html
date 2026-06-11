@@ -123,18 +123,19 @@
   .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; border-color: var(--gold) !important; }
   .nav-cta::after { display: none !important; }
 
-  /* PAGE HERO */
+ /* PAGE HERO */
   .page-hero {
-    height: 45vh;
-    min-height: 320px;
+    height: auto;               /* Changed from 45vh */
+    min-height: auto;          /* Changed from 320px */
     display: flex;
     align-items: flex-end;
     position: relative;
     overflow: hidden;
-    padding: 0 60px 50px 60px;
+    padding: 140px 60px 20px 60px; /* Increased top padding for nav, reduced bottom */
     text-align: center;
     justify-content: center;
   }
+ 
   .page-hero-bg {
     position: absolute;
     inset: 0;
