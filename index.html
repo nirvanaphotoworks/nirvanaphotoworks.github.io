@@ -983,31 +983,30 @@
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-rule"></div>
-  <div class="hero-deco-letter">N</div>
+.hero-title {
+  /* Scales dynamically, capping at a more reasonable maximum size */
+  font-size: clamp(2.5rem, 5vw, 4.5rem); 
+  line-height: 1.1;
+  font-family: 'YourSerifFont', serif; /* Keeps your elegant serif styling */
+  color: #e2d2bc; /* Matching your gold/cream tone */
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">Est. 2018 &nbsp;&nbsp; Fine Art Photography</div>
-    <h1 class="hero-title">
-      Every Frame<br>
-      <em>A Story</em>
-    </h1>
-    <p class="hero-subtitle">
-      Cinematic portraits and life's most tender moments,<br>
-      rendered with precision and quiet soul.
-    </p>
-    <div class="hero-actions">
-      <a href="contact.html" class="btn-primary"><span>Book a Session</span></a>
-      <a href="gallery.html" class="btn-ghost">
-        <div class="btn-ghost-arrow"></div>
-        View Gallery
-      </a>
-    </div>
-  </div>
+.hero-title em {
+  font-style: italic;
+  font-family: 'YourItalicSerifFont', serif;
+  color: #cbb493; /* Slight variation for "A Story" if desired */
+}
+
+/* Optional: Bring down the subtitle size a hair if the title change makes it feel heavy */
+.hero-subtitle {
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  line-height: 1.6;
+  opacity: 0.8;
+  max-width: 600px; /* Prevents text lines from getting too long and awkward */
+  margin-bottom: 2.5rem;
+}
 
   <div class="scroll-indicator">
     <div class="scroll-line"></div>
