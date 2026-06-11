@@ -3,207 +3,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nirvana Photoworks</title>
+<title>Nirvana Photoworks | Cinematic Photography</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-body{
-    margin:0;
-    background:#0a0a0a;
-    color:#fff;
-    font-family:'Inter', sans-serif;
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-card: #121212;
+    --accent: #d4af37; /* Refined luxury champagne gold */
+    --text-main: #f5f5f5;
+    --text-muted: #a0a0a0;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* NAV */
-.nav{
-    position:fixed;
-    top:0;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    padding:20px;
-    background:rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
-    z-index:1000;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.nav a{
-    color:#c9a24e;
-    text-decoration:none;
-    font-size:14px;
-    letter-spacing:1px;
+body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    letter-spacing: 1px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-.nav a:hover{
-    color:#fff;
+/* --- PREMIUM NAVIGATION --- */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 6%;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
 }
 
-/* HERO */
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-    padding:0 10%;
-    background: radial-gradient(circle at center,#1a1a1a,#000);
+.nav-brand {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 400;
 }
 
-/* Brand */
-.brand{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.nav-links {
+    display: flex;
+    gap: 40px;
 }
 
-.logo{
-    width:60px;
-    height:60px;
-    object-fit:contain;
-    filter: drop-shadow(0 0 10px rgba(201,162,78,0.25));
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    transition: var(--transition);
+    position: relative;
+    padding: 5px 0;
 }
 
-.brand-name{
-    font-family:'Playfair Display', serif;
-    font-size:42px;
-    letter-spacing:6px;
-    color:#c9a24e;
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent);
 }
 
-/* Tagline */
-.tagline{
-    margin:10px 0 5px 75px;
-    color:#c9a24e;
-    letter-spacing:3px;
-    font-size:14px;
-    text-transform:uppercase;
+/* Elegant underline hover effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent);
+    transition: var(--transition);
 }
 
-/* Subtext */
-.subtext{
-    margin:10px 0 0 75px;
-    color:#aaa;
-    max-width:420px;
-    font-size:15px;
-    line-height:1.6;
+.nav-links a:hover::after {
+    width: 100%;
 }
 
-/* CTA */
-.btn{
-    margin:25px 0 0 75px;
-    padding:12px 25px;
-    border:1px solid #c9a24e;
-    color:#c9a24e;
-    text-decoration:none;
-    transition:0.3s;
-    display:inline-block;
+/* --- IMMERSIVE HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    position: relative;
+    background: radial-gradient(circle at 80% 50%, #161616 0%, #0a0a0a 100%);
 }
 
-.btn:hover{
-    background:#c9a24e;
-    color:#000;
+/* Decorative background light element for depth */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
 }
 
-/* SECTIONS */
-.section{
-    padding:80px 20px;
-    text-align:center;
+.hero-content {
+    max-width: 650px;
+    z-index: 2;
+    position: relative;
 }
 
-.section h2{
-    color:#c9a24e;
-    font-family:'Playfair Display', serif;
-    margin-bottom:40px;
+.hero-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
 }
 
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    max-width:1000px;
-    margin:auto;
+.hero-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.3);
+    padding: 4px;
 }
 
-.card{
-    border:1px solid rgba(201,162,78,0.2);
-    padding:40px;
-    transition:0.3s;
+.hero-pretitle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--accent);
+    font-weight: 500;
 }
 
-.card:hover{
-    border-color:#c9a24e;
-    transform:translateY(-5px);
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(45px, 6vw, 75px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 15px 0 25px 0;
+    color: var(--text-main);
 }
 
-.card a{
-    color:#fff;
-    text-decoration:none;
-    font-size:16px;
-    letter-spacing:1px;
+.hero-title span {
+    font-style: italic;
+    color: var(--accent);
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:30px;
-    color:#666;
-    border-top:1px solid rgba(255,255,255,0.1);
+.hero-subtext {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 40px;
+    font-family: var(--font-serif);
+    font-size: 20px;
 }
 
+/* --- LUXURY CALL TO ACTION --- */
+.btn-luxury {
+    position: relative;
+    display: inline-block;
+    padding: 16px 35px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: var(--transition);
+}
+
+.btn-luxury:hover {
+    border-color: var(--accent);
+    color: #000;
+}
+
+.btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--accent);
+    z-index: -1;
+    transition: var(--transition);
+}
+
+.btn-luxury:hover::before {
+    width: 100%;
+}
+
+/* --- PORTFOLIO / SERVICES SECTION --- */
+.section {
+    padding: 140px 8%;
+    background: #0f0f0f;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 90px;
+    position: relative;
+}
+
+.section-subtitle {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--text-main);
+}
+
+/* --- EXPERT EDITORIAL GRID --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Custom asymmetrical grid mapping for premium editorial feel */
+.portfolio-card {
+    position: relative;
+    background: var(--bg-card);
+    height: 480px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Alternating sizes for visual rhythm */
+.portfolio-card:nth-child(1) { grid-column: span 3; }
+.portfolio-card:nth-child(2) { grid-column: span 3; }
+.portfolio-card:nth-child(3) { grid-column: span 2; }
+.portfolio-card:nth-child(4) { grid-column: span 2; }
+.portfolio-card:nth-child(5) { grid-column: span 2; }
+
+/* Elegant Hover Overlays */
+.portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+    transition: var(--transition);
+}
+
+/* Dynamic subtle background fill simulation until you add custom imagery */
+.portfolio-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    opacity: 0.3;
+    z-index: 0;
+    transition: var(--transition);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212,175,55,0.4);
+}
+
+.portfolio-card:hover::before {
+    background: linear-gradient(to bottom, rgba(212,175,55,0.05) 0%, rgba(0,0,0,0.95) 100%);
+}
+
+.portfolio-content {
+    position: relative;
+    z-index: 2;
+    transform: translateY(10px);
+    transition: var(--transition);
+    width: 100%;
+}
+
+.portfolio-card:hover .portfolio-content {
+    transform: translateY(0);
+}
+
+.portfolio-cat {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.portfolio-name {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    color: var(--text-main);
+    font-weight: 300;
+}
+
+.portfolio-link-view {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-top: 15px;
+    display: block;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.portfolio-card:hover .portfolio-link-view {
+    opacity: 1;
+    color: var(--text-main);
+}
+
+/* --- FOOTER --- */
+footer {
+    background: var(--bg-dark);
+    text-align: center;
+    padding: 60px 20px;
+    color: #555;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+footer a {
+    color: #777;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--accent);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1024px) {
+    .portfolio-grid { gap: 20px; }
+    .portfolio-card:nth-child(1),
+    .portfolio-card:nth-child(2),
+    .portfolio-card:nth-child(3),
+    .portfolio-card:nth-child(4),
+    .portfolio-card:nth-child(5) { grid-column: span 3; }
+}
+
+@media (max-width: 768px) {
+    .nav { padding: 20px 4%; }
+    .nav-links { display: none; } /* Consider implementing a clean burger menu if links expand */
+    .hero { padding: 0 6%; }
+    .portfolio-card:nth-child(1),
+    .portfolio-card:nth-child(2),
+    .portfolio-card:nth-child(3),
+    .portfolio-card:nth-child(4),
+    .portfolio-card:nth-child(5) { grid-column: span 6; height: 400px; }
+    .section { padding: 90px 6%; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<div class="nav">
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="testimonials.html">Testimonials</a>
-    <a href="contact.html">Contact</a>
-</div>
+<nav class="nav">
+    <a href="index.html" class="nav-brand">NIRVANA</a>
+    <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
 
-<!-- HERO -->
-<div class="hero">
+<header class="hero">
+    <div class="hero-content">
+        <div class="hero-logo-wrapper">
+            <img src="images/logo.jpeg" alt="Nirvana Logo" class="hero-logo">
+            <span class="hero-pretitle">Fine Art Photography</span>
+        </div>
+        <h1 class="hero-title">Capturing raw moments with <span>cinematic precision</span>.</h1>
+        <p class="hero-subtext">Timeless framing paired with emotional depth. Based worldwide for select editorials, portraits, and private events.</p>
+        <a class="btn-luxury" href="contact.html">Inquire Portfolio</a>
+    </div>
+</header>
 
-    <div class="brand">
-        <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" class="logo">
-        <div class="brand-name">NIRVANA</div>
+<main class="section">
+    <div class="section-header">
+        <span class="section-subtitle">Selected Works</span>
+        <h2 class="section-title">The Portfolios</h2>
     </div>
 
-    <div class="tagline">Photoworks</div>
+    <div class="portfolio-grid">
+        <a href="events.html" class="portfolio-card">
+            <div class="portfolio-content">
+                <span class="portfolio-cat">01 / Editorial</span>
+                <div class="portfolio-name">Events</div>
+                <span class="portfolio-link-view">Explore Gallery</span>
+            </div>
+        </a>
 
-    <div class="subtext">
-        Capturing moments with cinematic precision and timeless emotion.
+        <a href="portraits.html" class="portfolio-card">
+            <div class="portfolio-content">
+                <span class="portfolio-cat">02 / Studio</span>
+                <div class="portfolio-name">Portraits</div>
+                <span class="portfolio-link-view">Explore Gallery</span>
+            </div>
+        </a>
+
+        <a href="maternity.html" class="portfolio-card">
+            <div class="portfolio-content">
+                <span class="portfolio-cat">03 / Intimate</span>
+                <div class="portfolio-name">Maternity</div>
+                <span class="portfolio-link-view">Explore Gallery</span>
+            </div>
+        </a>
+
+        <a href="family.html" class="portfolio-card">
+            <div class="portfolio-content">
+                <span class="portfolio-cat">04 / Heritage</span>
+                <div class="portfolio-name">Family</div>
+                <span class="portfolio-link-view">Explore Gallery</span>
+            </div>
+        </a>
+
+        <a href="newborn.html" class="portfolio-card">
+            <div class="portfolio-content">
+                <span class="portfolio-cat">05 / Delicate</span>
+                <div class="portfolio-name">Newborn</div>
+                <span class="portfolio-link-view">Explore Gallery</span>
+            </div>
+        </a>
     </div>
-
-    <a class="btn" href="contact.html">Book a Session</a>
-
-</div>
-
-<!-- SERVICES -->
-<div class="section">
-
-    <h2>Our Work</h2>
-
-    <div class="grid">
-
-        <div class="card"><a href="events.html">Events</a></div>
-        <div class="card"><a href="portraits.html">Portraits</a></div>
-        <div class="card"><a href="maternity.html">Maternity</a></div>
-        <div class="card"><a href="family.html">Family</a></div>
-        <div class="card"><a href="newborn.html">Newborn</a></div>
-
-    </div>
-
-</div>
+</main>
 
 <footer>
-    © 2026 Nirvana Photoworks | All Rights Reserved
+    &copy; 2026 <a href="index.html">Nirvana Photoworks</a>. Crafted for the aesthetic eye.
 </footer>
 
 </body>
