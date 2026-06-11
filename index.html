@@ -5,77 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nirvana Photoworks</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-body {
+
+body{
     margin:0;
-    font-family: Arial, sans-serif;
-    background:#0b0b0b;
-    color:white;
+    background:#0a0a0a;
+    color:#fff;
+    font-family:'Inter', sans-serif;
 }
 
-header {
+/* NAV */
+.nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:20px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    z-index:1000;
+}
+
+.nav a{
+    color:#c9a24e;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.nav a:hover{
+    color:#fff;
+}
+
+/* HERO */
+.hero{
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
-    background: radial-gradient(circle,#1a1a1a,#000);
+    background: radial-gradient(circle at center,#1a1a1a,#000);
+    padding:20px;
 }
 
-h1 {
+.hero img{
+    width:180px;
+    margin-bottom:20px;
+    filter: drop-shadow(0 0 10px rgba(201,162,78,0.3));
+}
+
+.hero h1{
+    font-family:'Playfair Display', serif;
+    font-size:48px;
+    margin:10px 0;
     color:#c9a24e;
-    font-size:50px;
-    margin:0;
-    letter-spacing:3px;
+    letter-spacing:2px;
 }
 
-p {
+.hero p{
     color:#aaa;
+    font-size:16px;
+    max-width:500px;
 }
 
-.nav {
-    position:absolute;
-    top:20px;
-    display:flex;
-    gap:20px;
-}
-
-.nav a {
+/* CTA BUTTON */
+.btn{
+    margin-top:20px;
+    padding:12px 25px;
+    border:1px solid #c9a24e;
     color:#c9a24e;
     text-decoration:none;
-    font-size:14px;
-}
-
-.cards {
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-    padding:60px;
-}
-
-.card {
-    border:1px solid rgba(201,162,78,0.3);
-    padding:40px;
-    text-align:center;
     transition:0.3s;
 }
 
-.card:hover {
-    transform:scale(1.03);
-    border-color:#c9a24e;
+.btn:hover{
+    background:#c9a24e;
+    color:#000;
 }
 
-footer {
+/* SECTIONS */
+.section{
+    padding:80px 20px;
     text-align:center;
-    padding:20px;
-    color:#777;
 }
+
+.section h2{
+    color:#c9a24e;
+    font-family:'Playfair Display', serif;
+    margin-bottom:40px;
+}
+
+/* GALLERY GRID */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    border:1px solid rgba(201,162,78,0.2);
+    padding:40px;
+    transition:0.3s;
+}
+
+.card:hover{
+    border-color:#c9a24e;
+    transform:translateY(-5px);
+}
+
+.card a{
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    letter-spacing:1px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <div class="nav">
     <a href="index.html">Home</a>
     <a href="gallery.html">Gallery</a>
@@ -83,21 +148,37 @@ footer {
     <a href="contact.html">Contact</a>
 </div>
 
-<header>
-    <h1>NIRVANA PHOTOWORKS</h1>
-    <p>Capturing Your Precious Memories</p>
-</header>
+<!-- HERO -->
+<div class="hero">
 
-<section class="cards">
-    <div class="card"><a href="events.html">Events</a></div>
-    <div class="card"><a href="portraits.html">Portraits</a></div>
-    <div class="card"><a href="maternity.html">Maternity</a></div>
-    <div class="card"><a href="family.html">Family</a></div>
-    <div class="card"><a href="newborn.html">Newborn</a></div>
-</section>
+    <img src="images/logo.jpg" alt="Nirvana Photoworks Logo">
+
+    <h1>NIRVANA PHOTOWORKS</h1>
+    <p>Timeless photography capturing emotion, elegance, and memories that last forever.</p>
+
+    <a class="btn" href="contact.html">Book a Session</a>
+
+</div>
+
+<!-- SERVICES -->
+<div class="section">
+
+    <h2>Our Work</h2>
+
+    <div class="grid">
+
+        <div class="card"><a href="events.html">Events</a></div>
+        <div class="card"><a href="portraits.html">Portraits</a></div>
+        <div class="card"><a href="maternity.html">Maternity</a></div>
+        <div class="card"><a href="family.html">Family</a></div>
+        <div class="card"><a href="newborn.html">Newborn</a></div>
+
+    </div>
+
+</div>
 
 <footer>
-    © 2026 Nirvana Photoworks
+    © 2026 Nirvana Photoworks | All Rights Reserved
 </footer>
 
 </body>
