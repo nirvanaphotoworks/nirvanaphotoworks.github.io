@@ -47,40 +47,59 @@ body{
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
-    text-align:center;
+    align-items:flex-start;
+    padding:0 10%;
     background: radial-gradient(circle at center,#1a1a1a,#000);
-    padding:20px;
 }
 
-.hero img{
-    width:180px;
-    margin-bottom:20px;
-    filter: drop-shadow(0 0 10px rgba(201,162,78,0.3));
+/* Brand */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.hero h1{
+.logo{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+    filter: drop-shadow(0 0 10px rgba(201,162,78,0.25));
+}
+
+.brand-name{
     font-family:'Playfair Display', serif;
-    font-size:48px;
-    margin:10px 0;
+    font-size:42px;
+    letter-spacing:6px;
     color:#c9a24e;
-    letter-spacing:2px;
 }
 
-.hero p{
+/* Tagline */
+.tagline{
+    margin:10px 0 5px 75px;
+    color:#c9a24e;
+    letter-spacing:3px;
+    font-size:14px;
+    text-transform:uppercase;
+}
+
+/* Subtext */
+.subtext{
+    margin:10px 0 0 75px;
     color:#aaa;
-    font-size:16px;
-    max-width:500px;
+    max-width:420px;
+    font-size:15px;
+    line-height:1.6;
 }
 
-/* CTA BUTTON */
+/* CTA */
 .btn{
-    margin-top:20px;
+    margin:25px 0 0 75px;
     padding:12px 25px;
     border:1px solid #c9a24e;
     color:#c9a24e;
     text-decoration:none;
     transition:0.3s;
+    display:inline-block;
 }
 
 .btn:hover{
@@ -100,7 +119,7 @@ body{
     margin-bottom:40px;
 }
 
-/* GALLERY GRID */
+/* GRID */
 .grid{
     display:grid;
     grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -151,10 +170,16 @@ footer{
 <!-- HERO -->
 <div class="hero">
 
-    <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo">
+    <div class="brand">
+        <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" class="logo">
+        <div class="brand-name">NIRVANA</div>
+    </div>
 
-    <h1>NIRVANA PHOTOWORKS</h1>
-    <p>Capturing your precious memories</p>
+    <div class="tagline">Photoworks</div>
+
+    <div class="subtext">
+        Capturing moments with cinematic precision and timeless emotion.
+    </div>
 
     <a class="btn" href="contact.html">Book a Session</a>
 
