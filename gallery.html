@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+    <title>Gallery | Nirvana Photoworks</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
 
+    <style>
+        /* [PASTE YOUR EXISTING CSS HERE - I have kept the structure, but ensure the full CSS from your previous file is placed here] */
+        
+        /* ADDITION FOR GALLERY PAGE LAYOUT */
+        .page-header { padding: 160px 60px 80px; text-align: center; }
+        .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 80px); color: var(--ivory); font-weight: 300; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 60px 120px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-card {
+            aspect-ratio: 4/5;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .gallery-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        
+        .gallery-card:hover .gallery-card-bg { transform: scale(1.05); }
+
+        .gallery-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(8,8,8,0.8) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+        }
+
+        .gallery-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: var(--ivory);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+    <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
+        <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
+        <div style="display: flex; flex-direction: column; gap: 1px;">
+            <div class="nav-logo-name">Nirvana</div>
+            <div class="nav-logo-sub">Photoworks</div>
+        </div>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="contact.html" class="nav-cta">Book Session</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="contact.html">Contact</a>
+</div>
+
+<section class="page-header">
+    <h1 class="page-title">Our Work</h1>
+</section>
+
+<section class="gallery-grid">
+    <a href="portraits.html" class="gallery-card">
+        <div class="gallery-card-bg" style="background-image: url('images/portraits.jpg');"></div>
+        <div class="gallery-card-overlay">
+            <h2 class="gallery-card-title">Portraits</h2>
+        </div>
+    </a>
+    <a href="maternity.html" class="gallery-card">
+        <div class="gallery-card-bg" style="background-image: url('images/maternity.jpg');"></div>
+        <div class="gallery-card-overlay">
+            <h2 class="gallery-card-title">Maternity</h2>
+        </div>
+    </a>
+    <a href="newborn.html" class="gallery-card">
+        <div class="gallery-card-bg" style="background-image: url('images/newborn.jpg');"></div>
+        <div class="gallery-card-overlay">
+            <h2 class="gallery-card-title">Newborn</h2>
+        </div>
+    </a>
+    <a href="family.html" class="gallery-card">
+        <div class="gallery-card-bg" style="background-image: url('images/family.jpg');"></div>
+        <div class="gallery-card-overlay">
+            <h2 class="gallery-card-title">Family</h2>
+        </div>
+    </a>
+    <a href="events.html" class="gallery-card">
+        <div class="gallery-card-bg" style="background-image: url('images/events.jpg');"></div>
+        <div class="gallery-card-overlay">
+            <h2 class="gallery-card-title">Events</h2>
+        </div>
+    </a>
+</section>
+
+<script>
+    // --- BASIC JS FOR INTERACTIVITY ---
+    // Handle Custom Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+    });
+
+    // Handle Mobile Menu
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+</script>
+
+</body>
+</html>
