@@ -9,7 +9,7 @@
 
 <style>
   /* ==========================================================================
-     GLOBAL RESET & VARIABLES (From Main Page)
+     GLOBAL RESET & VARIABLES
      ========================================================================== */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,38 +34,7 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
-    cursor: none;
   }
-
-  /* ==========================================================================
-     CUSTOM CURSOR
-     ========================================================================== */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-    mix-blend-mode: difference;
-  }
-  
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-    opacity: 0.6;
-  }
-  
-  body:has(a:hover) .cursor-ring,
-  body:has(button:hover) .cursor-ring { width: 60px; height: 60px; opacity: 0.25; }
 
   /* ==========================================================================
      NAVIGATION
@@ -90,11 +59,11 @@
     z-index: -1;
   }
 
-  .nav-logo { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo { display: flex; flex-direction: row; align-items: center; gap: 14px; }
   .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 18px; letter-spacing: 7px; color: var(--gold); text-transform: uppercase; }
   .nav-logo-sub { font-size: 9px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
 
-  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links { display: flex; gap: 48px; list-style: none; align-items: center; }
   .nav-links a { color: var(--ivory-dim); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; position: relative; }
   .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.4s ease; }
   .nav-links a:hover { color: var(--gold); }
@@ -103,6 +72,80 @@
   .nav-cta { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold) !important; border: 1px solid var(--thin); padding: 10px 22px; transition: all 0.4s ease !important; }
   .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; border-color: var(--gold) !important; }
   .nav-cta::after { display: none !important; }
+
+  /* MOBILE MENU TOGGLE BUTTON */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2000;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--ivory);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+  }
+
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(4.5px) rotate(45deg);
+    background: var(--gold);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    transform: translateY(-4.5px) rotate(-45deg);
+    background: var(--gold);
+  }
+
+  /* LUXURY MOBILE DROP-DOWN OVERLAY PANEL */
+  .mobile-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    background: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    
+    /* Hidden States */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-15px);
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-menu a {
+    color: var(--ivory-dim);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-menu a:hover {
+    color: var(--gold);
+    transform: scale(1.03);
+  }
 
   /* ==========================================================================
      INTERIOR HERO SECTION
@@ -205,13 +248,13 @@
   .whatsapp-float svg {
     width: 20px; 
     height: 20px;
-    fill: #25D366; /* Vibrant Official Green */
+    fill: #25D366;
     flex-shrink: 0;
-    filter: drop-shadow(0px 0px 6px rgba(37, 211, 102, 0.4)); /* Glowing effect */
+    filter: drop-shadow(0px 0px 6px rgba(37, 211, 102, 0.4));
   }
 
   /* ==========================================================================
-     FOOTER (From Main Page)
+     FOOTER
      ========================================================================== */
   footer {
     border-top: 1px solid var(--thin);
@@ -234,14 +277,9 @@
   .footer-legal a:hover { color: var(--gold); }
 
   /* ==========================================================================
-     ANIMATIONS & RESPONSIVE
+     RESPONSIVE BREAKPOINTS
      ========================================================================== */
   @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
-  
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
 
   @media (max-width: 1024px) {
     .testimonials-grid { grid-template-columns: 1fr 1fr; }
@@ -251,11 +289,13 @@
   @media (max-width: 768px) {
     nav { padding: 22px 30px; }
     .nav-links { display: none; }
+    .menu-toggle { display: flex; }
+    
     .interior-hero { padding: 160px 30px 60px; }
-    .testimonials-grid { grid-template-columns: 1fr; padding: 60px 30px 100px; }
+    .testimonials-grid { grid-template-columns: 1fr; padding: 60px 30px 100px; gap: 24px; }
     footer { padding: 48px 30px 30px; }
-    .footer-top { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; gap: 20px; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
     .whatsapp-float { bottom: 24px; right: 24px; padding: 12px 18px; }
     .whatsapp-text { display: none; }
   }
@@ -263,11 +303,8 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <nav>
-  <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
+  <div class="nav-logo">
     <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
     <div style="display: flex; flex-direction: column; gap: 1px;">
       <div class="nav-logo-name">Nirvana</div>
@@ -280,51 +317,65 @@
     <li><a href="testimonials.html">Testimonials</a></li>
     <li><a href="contact.html" class="nav-cta">Book Session</a></li>
   </ul>
+
+  <!-- Animated Mobile Toggle Icon Button -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
+<!-- Custom Mobile Navigation Overlay Menu Framework -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="testimonials.html">Testimonials</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+</div>
+
 <header class="interior-hero">
-  <div class="hero-eyebrow reveal">Client Experiences</div>
-  <h1 class="hero-title reveal reveal-delay-1">Kind <em>Words</em></h1>
+  <div class="hero-eyebrow">Client Experiences</div>
+  <h1 class="hero-title">Kind <em>Words</em></h1>
 </header>
 
 <section class="testimonials-grid">
   
-  <div class="testimonial-card reveal">
+  <div class="testimonial-card">
     <p class="quote-text">"I can't thank Nirvana Photoworks enough for capturing our newborn son so beautifully! She was so patient and kind, even while adapting poses, lighting, and timing to work around his needs. She never rushed us and treated my little one with such gentle care. The photos are pure magic; I am beyond words."</p>
     <div class="client-name">Cristina &amp; James</div>
   </div>
 
-  <div class="testimonial-card reveal reveal-delay-1">
+  <div class="testimonial-card">
     <p class="quote-text">"Nirvana Photoworks did a wonderful job. My partner and I are so happy to have these memories. Even though we didn't know how to pose, she explained everything to us, and the photos came out natural and wonderful. She is incredibly patient and friendly."</p>
     <div class="client-name">Naomi Sotelo</div>
   </div>
 
-  <div class="testimonial-card reveal reveal-delay-2">
+  <div class="testimonial-card">
     <p class="quote-text">"A super fun session and the best one we've had to date. The pictures are absolutely gorgeous."</p>
     <div class="client-name">Divya &amp; Family</div>
   </div>
 
-  <div class="testimonial-card reveal">
+  <div class="testimonial-card">
     <p class="quote-text">"Madhura is very professional and fun to work with. Days before the shoot, she checked in to see if I needed help with props or outfits. On the day of our session, it was very windy, but she worked hard to get the shots and went above and beyond to schedule a second shoot to ensure I was satisfied. She even provided the props and directed our poses. I highly recommend her!"</p>
     <div class="client-name">Client</div>
   </div>
 
-  <div class="testimonial-card reveal reveal-delay-1">
+  <div class="testimonial-card">
     <p class="quote-text">"Thank you for capturing our family and for being so patient. You knew exactly what we were looking for and captured the perfect pictures."</p>
     <div class="client-name">Russ &amp; Stephanie</div>
   </div>
 
-  <div class="testimonial-card reveal reveal-delay-2">
+  <div class="testimonial-card">
     <p class="quote-text">"We had such a great experience with Nirvana Photoworks! The team was friendly, patient, and made us feel completely at ease—especially the kids. They were incredibly helpful with the prep work, and our photos turned out beautifully. I really appreciate the eye for detail. Highly recommended!"</p>
     <div class="client-name">Nivedha &amp; Raja</div>
   </div>
 
-  <div class="testimonial-card reveal">
+  <div class="testimonial-card">
     <p class="quote-text">"Madhu is very passionate and creative. She captures precious moments and smiles through her lens beautifully."</p>
     <div class="client-name">Kavya Reddy &amp; Santhosh</div>
   </div>
 
-  <div class="testimonial-card reveal reveal-delay-1">
+  <div class="testimonial-card">
     <p class="quote-text">"We booked Nirvana Photoworks for a family session, and the experience was amazing from start to finish. The photographer was patient and friendly, making everyone feel comfortable—even our kids, who usually don't sit still! The photos are natural, warm, and full of genuine moments. The editing style is elegant, and we received our gallery quickly."</p>
     <div class="client-name">Rakesh Chandar</div>
   </div>
@@ -386,40 +437,33 @@
 </footer>
 
 <script>
-  // 1. CUSTOM CURSOR TRACKING LOGIC
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  // 1. MOBILE MENU DRAWER PANEL INTERACTION LOGIC
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    
+    // Prevent background scrolling when menu drawer is open
+    if (mobileMenu.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   });
 
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing); 
-  }
-  animateRing();
-
-  // 2. SCROLL REVEAL MECHANIC
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); 
-        observer.unobserve(entry.target); 
-      }
+  // Automatically dismiss mobile panel layout when clicking any link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
     });
-  }, { threshold: 0.12 });
+  });
 
-  reveals.forEach(el => observer.observe(el));
-
-  // 3. NAVIGATION BACKGROUND SHIFT LOGIC
+  // 2. NAVIGATION BACKGROUND SHIFT LOGIC
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
