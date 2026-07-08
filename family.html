@@ -2,180 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>Family | Nirvana Photoworks</title>
 
-<title>Family - Nirvana Photoworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0b0b0b;
-        color: white;
-    }
+  /* --- CORE THEME (Inherited from Home) --- */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .nav {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        padding: 20px;
-        background: #000;
-    }
+  :root {
+    --black: #080808;
+    --charcoal: #111010;
+    --warm-dark: #141210;
+    --gold: #c4a46b;
+    --ivory: #f2ead8;
+    --ivory-dim: rgba(242,234,216,0.55);
+    --muted: rgba(242,234,216,0.35);
+    --thin: rgba(196,164,107,0.15);
+  }
 
-    .nav a {
-        color: #c9a24e;
-        text-decoration: none;
-        font-size: 14px;
-    }
+  body {
+    background: var(--black);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
-    h2 {
-        text-align: center;
-        color: #c9a24e;
-        padding: 30px;
-        font-weight: 300;
-        letter-spacing: 2px;
-    }
 
-    .gallery {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        padding: 20px;
-    }
+  /* NAVIGATION */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 28px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 70%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    letter-spacing: 7px; color: var(--gold); text-transform: uppercase;
+  }
+  .nav-logo-sub {
+    font-size: 9px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links a {
+    color: var(--ivory-dim); text-decoration: none; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; position: relative;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  
+  .nav-toggle { display: none; background: none; border: none; cursor: none; padding: 8px; z-index: 1100; }
+  .nav-toggle span { display: block; width: 24px; height: 1px; background: var(--gold); margin: 6px 0; }
 
-    .gallery img {
-        width: 300px;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 10px;
-        cursor: pointer;
-        border: 1px solid rgba(201,162,78,0.3);
-        transition: 0.3s;
-    }
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    position: fixed; inset: 0; background: rgba(8,8,8,0.98); backdrop-filter: blur(20px);
+    z-index: 1050; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 36px; opacity: 0; pointer-family: none; transition: opacity 0.4s ease;
+  }
+  .mobile-menu.open { opacity: 1; pointer-family: auto; }
+  .mobile-menu a {
+    color: var(--ivory); text-decoration: none; font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; letter-spacing: 4px; text-transform: uppercase;
+  }
 
-    .gallery img:hover {
-        transform: scale(1.03);
-    }
+  /* --- PAGE HEADER --- */
+  .page-header {
+    padding: 220px 60px 100px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 300;
+    color: var(--ivory);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+  }
 
-    /* LIGHTBOX */
-    .lightbox {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.95);
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 999;
-    }
+  /* --- GALLERY GRID --- */
+  .gallery-container {
+    padding: 0 60px 120px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  
+  /* Masonry Layout */
+  .gallery-grid {
+    display: column;
+    column-count: 3;
+    column-gap: 20px;
+  }
+  
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+    filter: brightness(0.9);
+  }
 
-    .lightbox img {
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 10px;
-    }
+  .gallery-item:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+  }
 
-    .controls {
-        margin-top: 15px;
-    }
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--thin);
+    background: var(--black);
+    padding: 64px 60px 40px;
+    text-align: center;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px;
+    letter-spacing: 6px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .footer-copy { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 24px; }
 
-    .controls button {
-        background: #c9a24e;
-        border: none;
-        padding: 10px 15px;
-        margin: 5px;
-        cursor: pointer;
-        font-weight: bold;
-    }
 
-    .close {
-        position: absolute;
-        top: 20px;
-        right: 25px;
-        font-size: 35px;
-        color: #c9a24e;
-        cursor: pointer;
-    }
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .gallery-grid { column-count: 2; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .page-header { padding: 160px 24px 60px; }
+    .gallery-container { padding: 0 20px 80px; }
+    .gallery-grid { column-count: 1; column-gap: 0; }
+    .gallery-item { margin-bottom: 12px; }
+  }
 </style>
 </head>
-
 <body>
 
-<div class="nav">
-    <a href="index.html">Home</a>
-    <a href="events.html">Events</a>
-    <a href="portraits.html">Portraits</a>
-    <a href="maternity.html">Maternity</a>
-    <a href="family.html">Family</a>
-    <a href="newborn.html">Newborn</a>
-    <a href="contact.html">Contact</a>
-</div>
 
-<h2>Family Photography</h2>
-
-<div class="gallery">
-    <img src="images/family/1.jpg">
-    <img src="images/family/2.jpg">
-    <img src="images/family/3.jpg">
-</div>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-    <div class="close" onclick="closeLightbox()">×</div>
-
-    <img id="lightbox-img">
-
-    <div class="controls">
-        <button onclick="prevImg()">Prev</button>
-        <button onclick="nextImg()">Next</button>
+<nav>
+  <a href="index.html" class="nav-logo" style="text-decoration: none; display: flex; flex-direction: row; align-items: center; gap: 14px;">
+    <div style="display: flex; flex-direction: column; gap: 1px;">
+      <div class="nav-logo-name">Nirvana</div>
+      <div class="nav-logo-sub">Photoworks</div>
     </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="family.html" style="color: var(--gold);">family</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Book Session</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="family.html">family</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
 </div>
+
+<header class="page-header">
+<span class="page-eyebrow">Family Collection</span>
+
+<h3 class="page-title">
+    Celebrating <em>Love & Connection</em>
+</h3>
+
+<p class="page-desc">
+Timeless portraits that preserve the laughter, bonds, and beautiful moments shared with the ones who matter most.
+</p>
+</header>
+
+<section class="gallery-container">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="images/family-1.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/family-2.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/family-3.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/family-4.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/family-5.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/family-6.jpg" alt="family photography by Nirvana Photoworks" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand-name">Nirvana Photoworks</div>
+  <div class="footer-copy">&copy; 2026. Canada. All Rights Reserved.</div>
+</footer>
 
 <script>
-const images = [
-    "images/family/1.jpg",
-    "images/family/2.jpg",
-    "images/family/3.jpg"
-];
-
-let currentIndex = 0;
-
-const imgs = document.querySelectorAll(".gallery img");
-
-imgs.forEach((img, index) => {
-    img.addEventListener("click", () => {
-        currentIndex = index;
-        openLightbox();
+  
+  // Mobile Menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if(navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
     });
-});
-
-function openLightbox() {
-    document.getElementById("lightbox").style.display = "flex";
-    updateImage();
-}
-
-function closeLightbox() {
-    document.getElementById("lightbox").style.display = "none";
-}
-
-function updateImage() {
-    document.getElementById("lightbox-img").src = images[currentIndex];
-}
-
-function nextImg() {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateImage();
-}
-
-function prevImg() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateImage();
-}
+  }
 </script>
 
 </body>
