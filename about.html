@@ -8,7 +8,6 @@
 
 <style>
   /* GLOBAL LAYOUT RESET */
-  /* Clears out default browser margins and paddings so spacing scales flawlessly across screens */
   *, *::before, *::after { 
     margin: 0; 
     padding: 0; 
@@ -16,18 +15,17 @@
   }
 
   /* COLOR PALETTE VARIABLES */
-  /* Change these hex codes if you ever want to adjust your core brand colors across the entire page */
   :root {
-    --black: #080808;                      /* Deep background color */
-    --charcoal: #111010;                   /* Secondary panel color */
-    --warm-dark: #141210;                  /* Soft warm tone for background blocks */
-    --gold: #c4a46b;                       /* Primary luxury gold accent */
-    --gold-light: #d4b87a;                 /* Hover state brighter gold */
-    --gold-dim: rgba(196,164,107,0.18);    /* Translucent gold overlay */
-    --ivory: #f2ead8;                      /* Main heading off-white */
-    --ivory-dim: rgba(242,234,216,0.55);   /* Subtext off-white */
-    --muted: rgba(242,234,216,0.35);       /* Low-priority explanatory text */
-    --thin: rgba(196,164,107,0.15);        /* Thin, elegant golden borders */
+    --black: #080808;                      
+    --charcoal: #111010;                   
+    --warm-dark: #141210;                  
+    --gold: #c4a46b;                       
+    --gold-light: #d4b87a;                 
+    --gold-dim: rgba(196,164,107,0.18);    
+    --ivory: #f2ead8;                      
+    --ivory-dim: rgba(242,234,216,0.55);   
+    --muted: rgba(242,234,216,0.35);       
+    --thin: rgba(196,164,107,0.15);        
   }
 
   html { scroll-behavior: smooth; }
@@ -37,22 +35,21 @@
     color: var(--ivory);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
-    overflow-x: hidden; /* Prevents awkward horizontal layout shifting on mobile */
+    overflow-x: hidden; 
   }
 
   /* TOP HEADER NAVIGATION BAR */
   nav {
-    position: fixed; /* Glues the navigation bar to the top of screen as the user scrolls */
+    position: fixed; 
     top: 0; left: 0; right: 0;
     z-index: 1000;
     padding: 28px 60px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Pushes brand alignment left, page navigation links right */
-    animation: fadeDown 1.2s ease 0.4s both; /* Smooth drop-down intro animation on entry */
+    justify-content: space-between; 
+    animation: fadeDown 1.2s ease 0.4s both; 
   }
 
-  /* Dynamic gradient overlay to ensure menu remains highly visible over dark imagery */
   nav::after {
     content: '';
     position: absolute;
@@ -63,7 +60,7 @@
 
   .nav-links {
     display: flex;
-    gap: 48px; /* Control spacing layout between structural links */
+    gap: 48px; 
     list-style: none;
     align-items: center;
   }
@@ -78,7 +75,6 @@
     position: relative;
   }
 
-  /* Animated elegant underline effect that appears on hover */
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -91,7 +87,7 @@
   .nav-links a:hover { color: var(--gold); }
   .nav-links a:hover::after { width: 100%; }
 
-  /* CALL TO ACTION BUTTON (Book Session) */
+  /* CALL TO ACTION BUTTON */
   .nav-cta {
     font-size: 10px;
     letter-spacing: 3px;
@@ -112,7 +108,7 @@
   .about-hero {
     position: relative;
     padding: 220px 60px 100px;
-    background: linear-gradient(180deg, #0f0c09 0%, var(--black) 100%); /* Moody gradient transition */
+    background: linear-gradient(180deg, #0f0c09 0%, var(--black) 100%); 
     text-align: center;
     border-bottom: 1px solid var(--thin);
   }
@@ -127,7 +123,7 @@
 
   .about-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 6vw, 80px); /* Scales font-size seamlessly between mobile and desktop */
+    font-size: clamp(42px, 6vw, 80px); 
     font-weight: 300;
     line-height: 1;
     color: var(--ivory);
@@ -141,15 +137,15 @@
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr; /* Left structural block holds photos, right block holds story */
-    gap: 100px; /* Space separating photo grid from the text column */
+    grid-template-columns: 1.1fr 0.9fr; 
+    gap: 100px; 
     align-items: center;
   }
 
   /* ASYMMETRIC STAGGERED PHOTO ARCHITECTURE */
   .about-visual-grid {
     position: relative;
-    height: 640px; /* Forces explicit spacing canvas layout for positioning layers */
+    height: 640px; 
     display: flex;
     align-items: center;
   }
@@ -163,15 +159,13 @@
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Solo Frame Positioning Parameters */
   .box-solo {
     width: 65%;
     height: 70%;
     top: 0; left: 0;
-    z-index: 2; /* Forces solo image to stack layered on top of the couple frame */
+    z-index: 2; 
   }
 
-  /* Couple Frame Positioning Parameters */
   .box-couple {
     width: 65%;
     height: 65%;
@@ -180,15 +174,16 @@
     border-color: var(--gold-dim);
   }
 
-  /* Editorial photo styling effects */
   .photo-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Keeps shapes pristine without smashing/stretching image dimensions */
-    filter: grayscale(15%) contrast(105%); /* High-end editorial tint treatment */
+    object-fit: cover; 
+    filter: grayscale(15%) contrast(105%); 
+    /* FIX 1: Forces mobile graphics acceleration so images don't vanish under filters */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
-  /* Small subtle typographic labels floating on frames */
   .box-accent {
     position: absolute;
     top: -15px; right: -15px;
@@ -241,7 +236,7 @@
 
   .values-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Divides section into 3 equal luxury service boxes */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
@@ -339,27 +334,26 @@
   .footer-copy { font-size: 11px; color: rgba(242,234,216,0.2); letter-spacing: 1px; }
 
   /* SCROLL REVEAL ANIMATIONS ENGINE */
-  /* Elements given class="reveal" start out slightly lower and completely transparent */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    /* FIX 2: Prevents Safari mobile from dynamic layer drops during transform triggers */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
-  /* Active reveal parameters triggered via JavaScript script engine once elements enter screen view */
   .reveal.visible { 
     opacity: 1; 
     transform: translateY(0); 
   }
 
-  /* Incremental transition-delay parameters for cinematic left-to-right cascade loading effects */
   .reveal-delay-1 { transition-delay: 0.15s; }
   .reveal-delay-2 { transition-delay: 0.3s; }
 
   @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* MEDIA QUERIES (RESPONSIVE ADAPTATIONS ENGINE) */
-  /* Collapses side-by-side grids into stacked elegant rows on tablets and smaller laptop screens */
+  /* MEDIA QUERIES */
   @media (max-width: 1024px) {
     .bio-section { grid-template-columns: 1fr; gap: 60px; padding: 80px 40px; }
     .about-visual-grid { height: 500px; max-width: 600px; margin: 0 auto; }
@@ -367,10 +361,9 @@
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   }
 
-  /* Tailors header dimensions, font tracking metrics, and hides extended list options for small smartphones */
   @media (max-width: 768px) {
     nav { padding: 22px 30px; }
-    .nav-links { display: none; } /* Clear screen real estate layout on mobile */
+    .nav-links { display: none; } 
     .about-hero { padding: 160px 30px 60px; }
     .bio-section { padding: 60px 20px; }
     .footer-top { grid-template-columns: 1fr; }
@@ -488,30 +481,30 @@
 </footer>
 
 <script>
-  // 1. INTERSECTION OBSERVER SCROLL REVEAL RENDERING LOGIC
-  // Watches document position layout coordinates silently to reveal blocks as they enter your viewport
+  // INTERSECTION OBSERVER SCROLL REVEAL RENDERING LOGIC
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Once target item element crosses 12% vertical screen barrier line parameter threshold...
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); /* Injects visibility transition values configured in CSS styles */
-        observer.unobserve(entry.target);     /* Stops tracking processed items to save browser memory */
+        entry.target.classList.add('visible'); 
+        observer.unobserve(entry.target);     
       }
     });
-  }, { threshold: 0.12 });
+  }, { 
+    // FIX 3: Lowered threshold from 0.12 to 0.02 so smaller phone screens trigger visibility immediately 
+    threshold: 0.02 
+  });
 
   reveals.forEach(el => observer.observe(el));
 
-  // 2. SCROLL-SENSITIVE FLOATING NAVIGATION PANEL ENGINE
-  // Darkens structural layout header background panel color once page movement progresses downwards
+  // SCROLL-SENSITIVE FLOATING NAVIGATION PANEL ENGINE
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
-      nav.style.background = 'rgba(8,8,8,0.96)';  /* Solid background overlay barrier */
-      nav.style.backdropFilter = 'blur(20px)';    /* Frosted glass backdrop texture blend layer */
+      nav.style.background = 'rgba(8,8,8,0.96)';  
+      nav.style.backdropFilter = 'blur(20px)';    
     } else {
-      nav.style.background = '';                  /* Reverts values seamlessly back into transparent state */
+      nav.style.background = '';                  
       nav.style.backdropFilter = '';
     }
   });
