@@ -179,7 +179,6 @@
     height: 100%;
     object-fit: cover; 
     filter: grayscale(15%) contrast(105%); 
-    /* FIX 1: Forces mobile graphics acceleration so images don't vanish under filters */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
   }
@@ -338,7 +337,6 @@
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    /* FIX 2: Prevents Safari mobile from dynamic layer drops during transform triggers */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -362,6 +360,14 @@
   }
 
   @media (max-width: 768px) {
+    /* FIX: Force all elements to be 100% visible instantly on mobile layouts */
+    /* This overrides any stuck JavaScript animation states completely */
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    
     nav { padding: 22px 30px; }
     .nav-links { display: none; } 
     .about-hero { padding: 160px 30px 60px; }
@@ -376,9 +382,7 @@
 <nav>
   <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
     <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
-  </div>
-  
-  <ul class="nav-links">
+  </div> <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="about.html">About</a></li>
@@ -491,7 +495,6 @@
       }
     });
   }, { 
-    // FIX 3: Lowered threshold from 0.12 to 0.02 so smaller phone screens trigger visibility immediately 
     threshold: 0.02 
   });
 
