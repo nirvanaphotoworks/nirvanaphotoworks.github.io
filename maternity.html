@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>Events | Nirvana Photoworks</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* --- CORE THEME (Inherited from Home) --- */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #080808;
+    --charcoal: #111010;
+    --warm-dark: #141210;
+    --gold: #c4a46b;
+    --ivory: #f2ead8;
+    --ivory-dim: rgba(242,234,216,0.55);
+    --muted: rgba(242,234,216,0.35);
+    --thin: rgba(196,164,107,0.15);
+  }
+
+  body {
+    background: var(--black);
+    color: var(--ivory);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  body.touch-device { cursor: auto; }
+  body.touch-device .cursor,
+  body.touch-device .cursor-ring { display: none; }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 10px; height: 10px; background: var(--gold);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); mix-blend-mode: difference;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%); opacity: 0.6;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { 
+    width: 60px; height: 60px; opacity: 0.25; 
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 28px 60px; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 70%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    letter-spacing: 7px; color: var(--gold); text-transform: uppercase;
+  }
+  .nav-logo-sub {
+    font-size: 9px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links a {
+    color: var(--ivory-dim); text-decoration: none; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; position: relative;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  
+  .nav-toggle { display: none; background: none; border: none; cursor: none; padding: 8px; z-index: 1100; }
+  .nav-toggle span { display: block; width: 24px; height: 1px; background: var(--gold); margin: 6px 0; }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    position: fixed; inset: 0; background: rgba(8,8,8,0.98); backdrop-filter: blur(20px);
+    z-index: 1050; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    color: var(--ivory); text-decoration: none; font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; letter-spacing: 4px; text-transform: uppercase;
+  }
+
+  /* --- PAGE HEADER --- */
+  .page-header {
+    padding: 220px 60px 100px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 300;
+    color: var(--ivory);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+  }
+
+  /* --- GALLERY GRID --- */
+  .gallery-container {
+    padding: 0 60px 120px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  
+  /* Masonry Layout */
+  .gallery-grid {
+    display: column;
+    column-count: 3;
+    column-gap: 20px;
+  }
+  
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+    filter: brightness(0.9);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--thin);
+    background: var(--black);
+    padding: 64px 60px 40px;
+    text-align: center;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px;
+    letter-spacing: 6px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .footer-copy { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 24px; }
+
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .gallery-grid { column-count: 2; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .page-header { padding: 160px 24px 60px; }
+    .gallery-container { padding: 0 20px 80px; }
+    .gallery-grid { column-count: 1; column-gap: 0; }
+    .gallery-item { margin-bottom: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" style="text-decoration: none; display: flex; flex-direction: row; align-items: center; gap: 14px;">
+    <div style="display: flex; flex-direction: column; gap: 1px;">
+      <div class="nav-logo-name">Nirvana</div>
+      <div class="nav-logo-sub">Photoworks</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="events.html" style="color: var(--gold);">Events</a></li>
+    <li><a href="portraits.html">Portraits</a></li>
+    <li><a href="contact.html">Book Session</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="portraits.html">Portraits</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<header class="page-header">
+  <span class="page-eyebrow">Portfolio</span>
+  <h1 class="page-title">Maternity <em>PhotoShoot</em></h1>
+  <p class="page-desc">Authentic milestones and unspoken details, documented exactly as they unfolded.</p>
+</header>
+
+<section class="gallery-container">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="images/event-1.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/event-2.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/event-3.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/event-4.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/event-5.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="images/event-6.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand-name">Nirvana Photoworks</div>
+  <div class="footer-copy">&copy; 2026. Kitchener, ON. All Rights Reserved.</div>
+</footer>
+
+<script>
+  
+  // Mobile Menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if(navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+  }
+</script>
+
+</body>
+</html>
