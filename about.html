@@ -145,9 +145,8 @@
   /* ASYMMETRIC STAGGERED PHOTO ARCHITECTURE */
   .about-visual-grid {
     position: relative;
-    height: 640px; 
-    display: flex;
-    align-items: center;
+    width: 100%;
+    min-height: 640px; 
   }
 
   .photo-box {
@@ -156,20 +155,21 @@
     background: var(--warm-dark);
     padding: 12px;
     overflow: hidden;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .box-solo {
     width: 65%;
-    height: 70%;
-    top: 0; left: 0;
+    height: 75%;
+    top: 0; 
+    left: 0;
     z-index: 2; 
   }
 
   .box-couple {
     width: 65%;
-    height: 65%;
-    bottom: 0; right: 0;
+    height: 70%;
+    bottom: 0; 
+    right: 0;
     z-index: 1;
     border-color: var(--gold-dim);
   }
@@ -179,8 +179,7 @@
     height: 100%;
     object-fit: cover; 
     filter: grayscale(15%) contrast(105%); 
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    display: block; /* Forces image to behave properly inside flex/absolute containers */
   }
 
   .box-accent {
@@ -332,46 +331,25 @@
 
   .footer-copy { font-size: 11px; color: rgba(242,234,216,0.2); letter-spacing: 1px; }
 
-  /* SCROLL REVEAL ANIMATIONS ENGINE */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+  @keyframes fadeDown { 
+    from { opacity: 0; transform: translateY(-16px); } 
+    to { opacity: 1; transform: translateY(0); } 
   }
-
-  .reveal.visible { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-
-  .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
-
-  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
 
   /* MEDIA QUERIES */
   @media (max-width: 1024px) {
     .bio-section { grid-template-columns: 1fr; gap: 60px; padding: 80px 40px; }
-    .about-visual-grid { height: 500px; max-width: 600px; margin: 0 auto; }
+    .about-visual-grid { min-height: 550px; max-width: 650px; margin: 0 auto; }
     .values-grid { grid-template-columns: 1fr; gap: 24px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
   }
 
   @media (max-width: 768px) {
-    /* FIX: Force all elements to be 100% visible instantly on mobile layouts */
-    /* This overrides any stuck JavaScript animation states completely */
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-    
     nav { padding: 22px 30px; }
     .nav-links { display: none; } 
     .about-hero { padding: 160px 30px 60px; }
     .bio-section { padding: 60px 20px; }
+    .about-visual-grid { min-height: 450px; } /* Ensures container never collapses */
     .footer-top { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
   }
@@ -382,7 +360,9 @@
 <nav>
   <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
     <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
-  </div> <ul class="nav-links">
+  </div>
+  
+  <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="about.html">About</a></li>
@@ -396,7 +376,7 @@
 </header>
 
 <section class="bio-section">
-  <div class="about-visual-grid reveal">
+  <div class="about-visual-grid">
     <div class="photo-box box-solo">
       <img src="images/aboutme.jpeg" alt="The Photographer Portrait">
       <div class="box-accent">ARTIST</div>
@@ -409,18 +389,18 @@
   </div>
 
   <div>
-    <div class="bio-label reveal">Our Heritage</div>
-    <h2 class="bio-heading reveal reveal-delay-1">From analytical engineering to the <em>quiet soul</em> of fine-art photography.</h2>
+    <div class="bio-label">Our Heritage</div>
+    <h2 class="bio-heading">From analytical engineering to the <em>quiet soul</em> of fine-art photography.</h2>
     
-    <p class="bio-text reveal reveal-delay-2">
+    <p class="bio-text">
       Welcome to Nirvana Photoworks. Our creative approach is shaped by an unexpected harmony. For over a decade, my husband and I navigated the high-stakes, fast-paced world of tech as IT professionals in the United States. That world taught us to look at the universe through a lens of absolute structural precision, balance, and fine detail.
     </p>
     
-    <p class="bio-text reveal reveal-delay-2">
+    <p class="bio-text">
       When we turned our next corporate leaf and migrated north to make Canada our home, we chose to channel that exact deep-level observation into our lifelong true passion: fine-art photography. Together, we blend the analytical eye of an engineer with a tender appreciation for fleeting human connections.
     </p>
     
-    <p class="bio-text reveal reveal-delay-2">
+    <p class="bio-text">
       While I direct the emotional framing, lighting styling, and intimate pacing behind the camera, my husband ensures the complex technology, logistical architecture, and digital post-processing rendering are flawlessly executed. We do not just click a shutter; we craft physical legacies that withstand generations.
     </p>
   </div>
@@ -428,17 +408,17 @@
 
 <section class="values-section">
   <div class="values-grid">
-    <div class="value-card reveal">
+    <div class="value-card">
       <h3 class="value-title">Calculated Light</h3>
       <p class="value-desc">Our tech background means we look at illumination mathematically—finding the perfect angles, contrasts, and deep shadows with architectural control.</p>
     </div>
 
-    <div class="value-card reveal reveal-delay-1">
+    <div class="value-card">
       <h3 class="value-title">A New Chapter</h3>
       <p class="value-desc">Having crossed borders from the US to Canada, we intimately understand the immense value of archiving transitions, new milestones, and homecomings.</p>
     </div>
 
-    <div class="value-card reveal reveal-delay-2">
+    <div class="value-card">
       <h3 class="value-title">Unrushed Craft</h3>
       <p class="value-desc">No transactional interactions. We design an intentional, unhurried space where your real chemistry and honest story take absolute precedence.</p>
     </div>
@@ -485,22 +465,8 @@
 </footer>
 
 <script>
-  // INTERSECTION OBSERVER SCROLL REVEAL RENDERING LOGIC
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); 
-        observer.unobserve(entry.target);     
-      }
-    });
-  }, { 
-    threshold: 0.02 
-  });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // SCROLL-SENSITIVE FLOATING NAVIGATION PANEL ENGINE
+  // ONLY the top navigation bar transparency logic remains.
+  // ALL scroll-reveal intersection observer logic has been permanently deleted.
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
