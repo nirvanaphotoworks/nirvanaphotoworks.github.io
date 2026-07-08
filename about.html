@@ -1,1117 +1,520 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>About — Nirvana Photoworks</title>
-
-
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
-
-
 <style>
-
   /* GLOBAL LAYOUT RESET */
-
   /* Clears out default browser margins and paddings so spacing scales flawlessly across screens */
-
   *, *::before, *::after { 
-
     margin: 0; 
-
     padding: 0; 
-
     box-sizing: border-box; 
-
   }
-
-
 
   /* COLOR PALETTE VARIABLES */
-
   /* Change these hex codes if you ever want to adjust your core brand colors across the entire page */
-
   :root {
-
     --black: #080808;                      /* Deep background color */
-
     --charcoal: #111010;                   /* Secondary panel color */
-
     --warm-dark: #141210;                  /* Soft warm tone for background blocks */
-
     --gold: #c4a46b;                       /* Primary luxury gold accent */
-
     --gold-light: #d4b87a;                 /* Hover state brighter gold */
-
     --gold-dim: rgba(196,164,107,0.18);    /* Translucent gold overlay */
-
     --ivory: #f2ead8;                      /* Main heading off-white */
-
     --ivory-dim: rgba(242,234,216,0.55);   /* Subtext off-white */
-
     --muted: rgba(242,234,216,0.35);       /* Low-priority explanatory text */
-
     --thin: rgba(196,164,107,0.15);        /* Thin, elegant golden borders */
-
   }
-
-
 
   html { scroll-behavior: smooth; }
 
-
-
   body {
-
     background: var(--black);
-
     color: var(--ivory);
-
     font-family: 'DM Sans', sans-serif;
-
     font-weight: 300;
-
     overflow-x: hidden; /* Prevents awkward horizontal layout shifting on mobile */
-
-    cursor: none;       /* Hides default browser arrow pointer to let custom cursor take over */
-
   }
-
-
-
-  /* CUSTOM INTERACTIVE CURSOR */
-
-  /* .cursor: The small solid glowing gold dot following the mouse instantly */
-
-  .cursor {
-
-    position: fixed;
-
-    width: 10px; height: 10px;
-
-    background: var(--gold);
-
-    border-radius: 50%;
-
-    pointer-events: none; /* Crucial: ensures the cursor elements don't block clicks to buttons below */
-
-    z-index: 9999;
-
-    transform: translate(-50%, -50%);
-
-    transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-
-    mix-blend-mode: difference; /* Beautifully inverts color dynamically depending on background */
-
-  }
-
-  /* .cursor-ring: The larger lagging golden circle element that smooths out movement */
-
-  .cursor-ring {
-
-    position: fixed;
-
-    width: 36px; height: 36px;
-
-    border: 1px solid var(--gold);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    z-index: 9998;
-
-    transform: translate(-50%, -50%);
-
-    transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-
-    opacity: 0.6;
-
-  }
-
-  /* Expands the pointer ring sizes gracefully when hovering clickable navigational items */
-
-  body:has(a:hover) .cursor-ring,
-
-  body:has(button:hover) .cursor-ring { 
-
-    width: 60px; 
-
-    height: 60px; 
-
-    opacity: 0.25; 
-
-  }
-
-
 
   /* TOP HEADER NAVIGATION BAR */
-
   nav {
-
     position: fixed; /* Glues the navigation bar to the top of screen as the user scrolls */
-
     top: 0; left: 0; right: 0;
-
     z-index: 1000;
-
     padding: 28px 60px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between; /* Pushes brand alignment left, page navigation links right */
-
     animation: fadeDown 1.2s ease 0.4s both; /* Smooth drop-down intro animation on entry */
-
   }
 
   /* Dynamic gradient overlay to ensure menu remains highly visible over dark imagery */
-
   nav::after {
-
     content: '';
-
     position: absolute;
-
     inset: 0;
-
     background: linear-gradient(to bottom, rgba(8,8,8,0.85) 0%, transparent 100%);
-
     z-index: -1;
-
   }
 
   .nav-links {
-
     display: flex;
-
     gap: 48px; /* Control spacing layout between structural links */
-
     list-style: none;
-
     align-items: center;
-
   }
 
   .nav-links a {
-
     color: var(--ivory-dim);
-
     text-decoration: none;
-
     font-size: 11px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
-
     transition: color 0.3s ease;
-
     position: relative;
-
   }
 
   /* Animated elegant underline effect that appears on hover */
-
   .nav-links a::after {
-
     content: '';
-
     position: absolute;
-
     bottom: -4px; left: 0;
-
     width: 0; height: 1px;
-
     background: var(--gold);
-
     transition: width 0.4s ease;
-
   }
 
   .nav-links a:hover { color: var(--gold); }
-
   .nav-links a:hover::after { width: 100%; }
 
-
-
   /* CALL TO ACTION BUTTON (Book Session) */
-
   .nav-cta {
-
     font-size: 10px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
-
     color: var(--gold) !important;
-
     border: 1px solid var(--thin);
-
     padding: 10px 22px;
-
     transition: all 0.4s ease !important;
-
   }
 
   .nav-cta:hover {
-
     background: var(--gold) !important;
-
     color: var(--black) !important;
-
     border-color: var(--gold) !important;
-
   }
 
-
-
   /* ABOUT HERO TIMELINE HEADER */
-
   .about-hero {
-
     position: relative;
-
     padding: 220px 60px 100px;
-
     background: linear-gradient(180deg, #0f0c09 0%, var(--black) 100%); /* Moody gradient transition */
-
     text-align: center;
-
     border-bottom: 1px solid var(--thin);
-
   }
 
   .about-eyebrow {
-
     font-size: 10px;
-
     letter-spacing: 5px;
-
     text-transform: uppercase;
-
     color: var(--gold);
-
     margin-bottom: 20px;
-
   }
 
   .about-title {
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: clamp(42px, 6vw, 80px); /* Scales font-size seamlessly between mobile and desktop */
-
     font-weight: 300;
-
     line-height: 1;
-
     color: var(--ivory);
-
   }
 
   .about-title em { font-style: italic; color: var(--gold); }
 
-
-
   /* NARRATIVE BIOGRAPHY SECTION WRAPPER */
-
   .bio-section {
-
     padding: 140px 60px;
-
     max-width: 1400px;
-
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns: 1.1fr 0.9fr; /* Left structural block holds photos, right block holds story */
-
     gap: 100px; /* Space separating photo grid from the text column */
-
     align-items: center;
-
   }
 
-
-
   /* ASYMMETRIC STAGGERED PHOTO ARCHITECTURE */
-
   .about-visual-grid {
-
     position: relative;
-
     height: 640px; /* Forces explicit spacing canvas layout for positioning layers */
-
     display: flex;
-
     align-items: center;
-
   }
 
   .photo-box {
-
     position: absolute;
-
     border: 1px solid var(--thin);
-
     background: var(--warm-dark);
-
     padding: 12px;
-
     overflow: hidden;
-
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-
   }
 
   /* Solo Frame Positioning Parameters */
-
   .box-solo {
-
     width: 65%;
-
     height: 70%;
-
     top: 0; left: 0;
-
     z-index: 2; /* Forces solo image to stack layered on top of the couple frame */
-
   }
 
   /* Couple Frame Positioning Parameters */
-
   .box-couple {
-
     width: 65%;
-
     height: 65%;
-
     bottom: 0; right: 0;
-
     z-index: 1;
-
     border-color: var(--gold-dim);
-
   }
 
   /* Editorial photo styling effects */
-
   .photo-box img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover; /* Keeps shapes pristine without smashing/stretching image dimensions */
-
     filter: grayscale(15%) contrast(105%); /* High-end editorial tint treatment */
-
   }
 
   /* Small subtle typographic labels floating on frames */
-
   .box-accent {
-
     position: absolute;
-
     top: -15px; right: -15px;
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: 12px;
-
     letter-spacing: 3px;
-
     color: var(--gold);
-
     opacity: 0.4;
-
   }
 
-
-
   /* BIOGRAPHY TEXT WRITING ARCHITECTURE */
-
   .bio-label {
-
     font-size: 9px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
-
     color: var(--gold);
-
     margin-bottom: 24px;
-
     display: flex;
-
     align-items: center;
-
     gap: 14px;
-
   }
 
   .bio-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
-
   
-
   .bio-heading {
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: clamp(32px, 3.5vw, 48px);
-
     font-weight: 300;
-
     line-height: 1.2;
-
     color: var(--ivory);
-
     margin-bottom: 32px;
-
   }
 
   .bio-heading em { font-style: italic; color: var(--gold); }
-
   
-
   .bio-text {
-
     font-size: 14px;
-
     line-height: 1.9;
-
     color: var(--ivory-dim);
-
     margin-bottom: 24px;
-
   }
 
-
-
   /* VALUES & CORE PHILOSOPHY BLOCK */
-
   .values-section {
-
     padding: 120px 60px;
-
     background: var(--warm-dark);
-
     border-top: 1px solid var(--thin);
-
     border-bottom: 1px solid var(--thin);
-
   }
 
   .values-grid {
-
     display: grid;
-
     grid-template-columns: repeat(3, 1fr); /* Divides section into 3 equal luxury service boxes */
-
     gap: 40px;
-
     max-width: 1200px;
-
     margin: 0 auto;
-
   }
 
   .value-card {
-
     padding: 40px;
-
     border: 1px solid var(--thin);
-
     background: rgba(8,8,8,0.3);
-
   }
 
   .value-title {
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: 24px;
-
     font-weight: 300;
-
     color: var(--gold);
-
     margin-bottom: 16px;
-
     letter-spacing: 0.5px;
-
   }
 
   .value-desc { font-size: 13px; line-height: 1.8; color: var(--muted); }
 
-
-
   /* FOOTER INTERACTIVE INFRASTRUCTURE */
-
   footer {
-
     background: var(--black);
-
     padding: 80px 60px 40px;
-
   }
 
   .footer-top {
-
     display: grid;
-
     grid-template-columns: 1.2fr 1fr 1fr 1fr;
-
     gap: 60px;
-
     margin-bottom: 60px;
-
   }
 
   .footer-brand-name {
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: 26px;
-
     font-weight: 300;
-
     letter-spacing: 8px;
-
     color: var(--gold);
-
     text-transform: uppercase;
-
     margin-bottom: 6px;
-
   }
 
   .footer-brand-tagline {
-
     font-size: 9px;
-
     letter-spacing: 3px;
-
     color: var(--muted);
-
     text-transform: uppercase;
-
     margin-bottom: 20px;
-
   }
 
   .footer-brand-text {
-
     font-size: 12px;
-
     line-height: 1.9;
-
     color: rgba(242,234,216,0.25);
-
     max-width: 240px;
-
   }
 
   .footer-col-title {
-
     font-size: 9px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
-
     color: var(--gold);
-
     margin-bottom: 24px;
-
     opacity: 0.7;
-
   }
 
   .footer-links {
-
     list-style: none;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 12px;
-
   }
 
   .footer-links a {
-
     text-decoration: none;
-
     font-size: 13px;
-
     color: rgba(242,234,216,0.3);
-
     transition: color 0.3s ease;
-
     letter-spacing: 0.5px;
-
   }
 
   .footer-links a:hover { color: var(--gold); }
-
   
-
   .footer-bottom {
-
     border-top: 1px solid var(--thin);
-
     padding-top: 28px;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
   }
 
   .footer-copy { font-size: 11px; color: rgba(242,234,216,0.2); letter-spacing: 1px; }
 
-
-
   /* SCROLL REVEAL ANIMATIONS ENGINE */
-
   /* Elements given class="reveal" start out slightly lower and completely transparent */
-
   .reveal {
-
     opacity: 0;
-
     transform: translateY(30px);
-
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-
   }
 
   /* Active reveal parameters triggered via JavaScript script engine once elements enter screen view */
-
   .reveal.visible { 
-
     opacity: 1; 
-
     transform: translateY(0); 
-
   }
 
   /* Incremental transition-delay parameters for cinematic left-to-right cascade loading effects */
-
   .reveal-delay-1 { transition-delay: 0.15s; }
-
   .reveal-delay-2 { transition-delay: 0.3s; }
-
-
 
   @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
 
-
-
   /* MEDIA QUERIES (RESPONSIVE ADAPTATIONS ENGINE) */
-
   /* Collapses side-by-side grids into stacked elegant rows on tablets and smaller laptop screens */
-
   @media (max-width: 1024px) {
-
     .bio-section { grid-template-columns: 1fr; gap: 60px; padding: 80px 40px; }
-
     .about-visual-grid { height: 500px; max-width: 600px; margin: 0 auto; }
-
     .values-grid { grid-template-columns: 1fr; gap: 24px; }
-
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-
   }
 
   /* Tailors header dimensions, font tracking metrics, and hides extended list options for small smartphones */
-
   @media (max-width: 768px) {
-
     nav { padding: 22px 30px; }
-
     .nav-links { display: none; } /* Clear screen real estate layout on mobile */
-
     .about-hero { padding: 160px 30px 60px; }
-
     .bio-section { padding: 60px 20px; }
-
     .footer-top { grid-template-columns: 1fr; }
-
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-
   }
-
 </style>
-
 </head>
-
 <body>
 
-
-
-<div class="cursor" id="cursor"></div>
-
-<div class="cursor-ring" id="cursorRing"></div>
-
-
-
 <nav>
-
   <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
-
-  <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
-
-  <div style="display: flex; flex-direction: column; gap: 1px;">
-
-
-
+    <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
   </div>
-
   
-
   <ul class="nav-links">
-
     <li><a href="index.html">Home</a></li>
-
     <li><a href="gallery.html">Gallery</a></li>
-
     <li><a href="about.html">About</a></li>
-
     <li><a href="contact.html" class="nav-cta">Book Session</a></li>
-
   </ul>
-
 </nav>
 
-
-
 <header class="about-hero">
-
   <div class="about-eyebrow">The Story Behind the Lens</div>
-
   <h1 class="about-title">Precision Meets <em>Poetry</em></h1>
-
 </header>
 
-
-
 <section class="bio-section">
-
-  
-
   <div class="about-visual-grid reveal">
-
-    
-
     <div class="photo-box box-solo">
-
       <img src="images/aboutme.jpeg" alt="The Photographer Portrait">
-
       <div class="box-accent">ARTIST</div>
-
     </div>
-
     
-
     <div class="photo-box box-couple">
-
       <img src="images/aboutus.jpeg" alt="The Partners Portrait">
-
       <div class="box-accent">PARTNERS</div>
-
     </div>
-
-    
-
   </div>
-
-
 
   <div>
-
     <div class="bio-label reveal">Our Heritage</div>
-
     <h2 class="bio-heading reveal reveal-delay-1">From analytical engineering to the <em>quiet soul</em> of fine-art photography.</h2>
-
     
-
     <p class="bio-text reveal reveal-delay-2">
-
       Welcome to Nirvana Photoworks. Our creative approach is shaped by an unexpected harmony. For over a decade, my husband and I navigated the high-stakes, fast-paced world of tech as IT professionals in the United States. That world taught us to look at the universe through a lens of absolute structural precision, balance, and fine detail.
-
     </p>
-
     
-
     <p class="bio-text reveal reveal-delay-2">
-
       When we turned our next corporate leaf and migrated north to make Canada our home, we chose to channel that exact deep-level observation into our lifelong true passion: fine-art photography. Together, we blend the analytical eye of an engineer with a tender appreciation for fleeting human connections.
-
     </p>
-
     
-
     <p class="bio-text reveal reveal-delay-2">
-
       While I direct the emotional framing, lighting styling, and intimate pacing behind the camera, my husband ensures the complex technology, logistical architecture, and digital post-processing rendering are flawlessly executed. We do not just click a shutter; we craft physical legacies that withstand generations.
-
     </p>
-
   </div>
-
 </section>
-
-
 
 <section class="values-section">
-
   <div class="values-grid">
-
-    
-
     <div class="value-card reveal">
-
       <h3 class="value-title">Calculated Light</h3>
-
       <p class="value-desc">Our tech background means we look at illumination mathematically—finding the perfect angles, contrasts, and deep shadows with architectural control.</p>
-
     </div>
-
-
 
     <div class="value-card reveal reveal-delay-1">
-
       <h3 class="value-title">A New Chapter</h3>
-
       <p class="value-desc">Having crossed borders from the US to Canada, we intimately understand the immense value of archiving transitions, new milestones, and homecomings.</p>
-
     </div>
-
-
 
     <div class="value-card reveal reveal-delay-2">
-
       <h3 class="value-title">Unrushed Craft</h3>
-
       <p class="value-desc">No transactional interactions. We design an intentional, unhurried space where your real chemistry and honest story take absolute precedence.</p>
-
     </div>
-
-
-
   </div>
-
 </section>
 
-
-
 <footer>
-
   <div class="footer-top">
-
     <div>
-
       <div class="footer-brand-name">Nirvana</div>
-
       <div class="footer-brand-tagline">Photoworks &nbsp; / &nbsp; Est. 2021</div>
-
       <p class="footer-brand-text">Fine art photography for life's most meaningful chapters. Based in Canada.</p>
-
     </div>
-
     <div>
-
       <div class="footer-col-title">Navigate</div>
-
       <ul class="footer-links">
-
         <li><a href="index.html">Home</a></li>
-
         <li><a href="gallery.html">Gallery</a></li>
-
         <li><a href="about.html">About</a></li>
-
         <li><a href="contact.html">Contact</a></li>
-
       </ul>
-
     </div>
-
     <div>
-
       <div class="footer-col-title">Specialities</div>
-
       <ul class="footer-links">
-
         <li><a href="portraits.html">Portraits</a></li>
-
         <li><a href="maternity.html">Maternity</a></li>
-
         <li><a href="newborn.html">Newborn</a></li>
-
         <li><a href="family.html">Family</a></li>
-
       </ul>
-
     </div>
-
     <div>
-
       <div class="footer-col-title">Contact</div>
-
       <ul class="footer-links">
-
         <li><a href="mailto:contact.nirvanaphotoworks@gmail.com">contact.nirvanaphotoworks@gmail.com</a></li>
-
         <li><a href="tel:+13413459974">+1 (341)-345-9974</a></li>
-
-<li><a href="https://www.instagram.com/nirvana_photoworks/">Instagram</a></li>
-
+        <li><a href="https://www.instagram.com/nirvana_photoworks/">Instagram</a></li>
       </ul>
-
     </div>
-
   </div>
-
   <div class="footer-bottom">
-
     <div class="footer-copy">© 2026 Nirvana Photoworks. All rights reserved.</div>
-
   </div>
-
 </footer>
 
-
-
 <script>
-
-  // 1. DYNAMIC DUAL-CIRCLE POINTER TRACKING INTERPRETER ENGINE
-
-  const cursor = document.getElementById('cursor');
-
-  const ring = document.getElementById('cursorRing');
-
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-
-
-  // Listens continuously for mouse position coordinate updates across browser interface canvas
-
-  document.addEventListener('mousemove', e => {
-
-    mx = e.clientX; 
-
-    my = e.clientY;
-
-    // Glues center point anchor of solid main center golden dot to mouse instantly
-
-    cursor.style.left = mx + 'px';
-
-    cursor.style.top = my + 'px';
-
-  });
-
-
-
-  // Controls the lag motion physics logic loops behind the outer golden pointer element ring
-
-  function animateRing() {
-
-    // 0.12 structural parameter calculates dampening drag effect for organic luxury visual easing
-
-    rx += (mx - rx) * 0.12;
-
-    ry += (my - ry) * 0.12;
-
-    ring.style.left = rx + 'px';
-
-    ring.style.top = ry + 'px';
-
-    requestAnimationFrame(animateRing); /* Renders frame animation loops fluidly at display speed rate */
-
-  }
-
-  animateRing();
-
-
-
-  // 2. INTERSECTION OBSERVER SCROLL REVEAL RENDERING LOGIC
-
+  // 1. INTERSECTION OBSERVER SCROLL REVEAL RENDERING LOGIC
   // Watches document position layout coordinates silently to reveal blocks as they enter your viewport
-
   const reveals = document.querySelectorAll('.reveal');
-
   const observer = new IntersectionObserver((entries) => {
-
     entries.forEach(entry => {
-
       // Once target item element crosses 12% vertical screen barrier line parameter threshold...
-
       if (entry.isIntersecting) {
-
         entry.target.classList.add('visible'); /* Injects visibility transition values configured in CSS styles */
-
         observer.unobserve(entry.target);     /* Stops tracking processed items to save browser memory */
-
       }
-
     });
-
   }, { threshold: 0.12 });
-
-
 
   reveals.forEach(el => observer.observe(el));
 
-
-
-  // 3. SCROLL-SENSITIVE FLOATING NAVIGATION PANEL ENGINE
-
+  // 2. SCROLL-SENSITIVE FLOATING NAVIGATION PANEL ENGINE
   // Darkens structural layout header background panel color once page movement progresses downwards
-
   const nav = document.querySelector('nav');
-
   window.addEventListener('scroll', () => {
-
     if (window.scrollY > 60) {
-
       nav.style.background = 'rgba(8,8,8,0.96)';  /* Solid background overlay barrier */
-
       nav.style.backdropFilter = 'blur(20px)';    /* Frosted glass backdrop texture blend layer */
-
     } else {
-
       nav.style.background = '';                  /* Reverts values seamlessly back into transparent state */
-
       nav.style.backdropFilter = '';
-
     }
-
   });
-
 </script>
-
 </body>
-
-</html> 
-
+</html>
