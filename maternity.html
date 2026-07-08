@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#080808">
-<title>Events | Nirvana Photoworks</title>
+<title>Maternity | Nirvana Photoworks</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
@@ -29,29 +29,8 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
-    cursor: none;
   }
 
-  body.touch-device { cursor: auto; }
-  body.touch-device .cursor,
-  body.touch-device .cursor-ring { display: none; }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed; width: 10px; height: 10px; background: var(--gold);
-    border-radius: 50%; pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%); mix-blend-mode: difference;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  .cursor-ring {
-    position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold);
-    border-radius: 50%; pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%); opacity: 0.6;
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  }
-  body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { 
-    width: 60px; height: 60px; opacity: 0.25; 
-  }
 
   /* NAVIGATION */
   nav {
@@ -188,8 +167,6 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <nav>
   <a href="index.html" class="nav-logo" style="text-decoration: none; display: flex; flex-direction: row; align-items: center; gap: 14px;">
@@ -200,8 +177,8 @@
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="events.html" style="color: var(--gold);">Events</a></li>
-    <li><a href="portraits.html">Portraits</a></li>
+    <li><a href="maternity.html" style="color: var(--gold);">Maternity</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="contact.html">Book Session</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
@@ -215,30 +192,36 @@
 </div>
 
 <header class="page-header">
-  <span class="page-eyebrow">Portfolio</span>
-  <h1 class="page-title">Maternity <em>PhotoShoot</em></h1>
-  <p class="page-desc">Authentic milestones and unspoken details, documented exactly as they unfolded.</p>
+<span class="page-eyebrow">Maternity Collection</span>
+
+<h1 class="page-title">
+    Celebrating the <em>Beauty of Motherhood</em>
+</h1>
+
+<p class="page-desc">
+Every pregnancy tells a story unlike any other. These portraits are created to preserve the anticipation, love, and quiet moments before your newest chapter begins—timeless memories for generations to cherish.
+</p>
 </header>
 
 <section class="gallery-container">
   <div class="gallery-grid">
     <div class="gallery-item">
-      <img src="images/maternity-1.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-1.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="images/maternity-2.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-2.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="images/maternity-3.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-3.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="images/maternity-4.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-4.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="images/maternity-5.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-5.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="images/maternity-6.jpg" alt="Event photography by Nirvana Photoworks" loading="lazy">
+      <img src="images/maternity-6.jpg" alt="Maternity photography by Nirvana Photoworks" loading="lazy">
     </div>
   </div>
 </section>
