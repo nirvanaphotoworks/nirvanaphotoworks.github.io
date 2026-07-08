@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#080808">
 <title>Newborn | Nirvana Photoworks</title>
 
-<link href="https://fonts.googleapis.com/css2?newborn=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&newborn=DM+Sans:wght@200;300;400&newborn=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
 <style>
   /* --- CORE THEME (Inherited from Home) --- */
@@ -26,7 +26,7 @@
   body {
     background: var(--black);
     color: var(--ivory);
-    font-newborn: 'DM Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
   }
@@ -40,7 +40,7 @@
     backdrop-filter: blur(8px);
   }
   .nav-logo-name {
-    font-newborn: 'Cormorant Garamond', serif; font-size: 18px;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
     letter-spacing: 7px; color: var(--gold); text-transform: uppercase;
   }
   .nav-logo-sub {
@@ -60,11 +60,11 @@
   .mobile-menu {
     position: fixed; inset: 0; background: rgba(8,8,8,0.98); backdrop-filter: blur(20px);
     z-index: 1050; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 36px; opacity: 0; pointer-newborn: none; transition: opacity 0.4s ease;
+    gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
   }
-  .mobile-menu.open { opacity: 1; pointer-newborn: auto; }
+  .mobile-menu.open { opacity: 1; pointer-events: auto; }
   .mobile-menu a {
-    color: var(--ivory); text-decoration: none; font-newborn: 'Cormorant Garamond', serif;
+    color: var(--ivory); text-decoration: none; font-family: 'Cormorant Garamond', serif;
     font-size: 32px; letter-spacing: 4px; text-transform: uppercase;
   }
 
@@ -84,7 +84,7 @@
     display: inline-block;
   }
   .page-title {
-    font-newborn: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(48px, 6vw, 84px);
     font-weight: 300;
     color: var(--ivory);
@@ -144,7 +144,7 @@
     text-align: center;
   }
   .footer-brand-name {
-    font-newborn: 'Cormorant Garamond', serif; font-size: 20px;
+    font-family: 'Cormorant Garamond', serif; font-size: 20px;
     letter-spacing: 6px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px;
   }
   .footer-copy { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 24px; }
@@ -177,7 +177,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="newborn.html" style="color: var(--gold);">newborn</a></li>
+    <li><a href="newborn.html" style="color: var(--gold);">Newborn</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="contact.html">Book Session</a></li>
   </ul>
@@ -186,7 +186,7 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
-  <a href="newborn.html">newborn</a>
+  <a href="newborn.html">Newborn</a>
   <a href="gallery.html">Gallery</a>
   <a href="contact.html">Contact</a>
 </div>
@@ -246,4 +246,3 @@ Capturing the delicate moments and precious memories of your baby’s earliest d
 
 </body>
 </html>
-
