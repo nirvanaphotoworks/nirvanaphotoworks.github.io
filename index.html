@@ -6,8 +6,6 @@
 <meta name="theme-color" content="#080808">
 <title>Nirvana Photoworks</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
 <style>
@@ -34,7 +32,41 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
+    cursor: none;
   }
+
+  /* Touch devices: bring back the system cursor */
+  body.touch-device { cursor: auto; }
+  body.touch-device .cursor,
+  body.touch-device .cursor-ring { display: none; }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    mix-blend-mode: difference;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+  }
+
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring { width: 60px; height: 60px; opacity: 0.25; }
 
   /* NAVIGATION */
   nav {
@@ -49,8 +81,6 @@
     animation: fadeDown 1.2s ease 0.4s both;
     transition: background 0.3s ease, backdrop-filter 0.3s ease;
   }
-
-  nav.scrolled { background: rgba(8,8,8,0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 
   nav::after {
     content: '';
@@ -127,10 +157,11 @@
     background: none;
     border: none;
     color: var(--ivory);
-    cursor: pointer;
+    cursor: none;
     padding: 8px;
     z-index: 1100;
   }
+  body.touch-device .nav-toggle { cursor: pointer; }
   .nav-toggle span {
     display: block;
     width: 24px; height: 1px;
@@ -206,7 +237,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    animation: heroImageFade 0.8s ease both;
+    animation: heroImageFade 1.8s cubic-bezier(0.16,1,0.3,1) 0.4s both;
   }
   /* Soft blend from dark moody background into the image 
   .hero-image::before {
@@ -235,8 +266,8 @@
   
   
   @keyframes heroImageFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: scale(1.08); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   .hero-grain {
@@ -624,10 +655,12 @@
   .service-card {
     position: relative;
     overflow: hidden;
+    cursor: none;
     text-decoration: none;
     display: block;
     background: #0d0b09;
   }
+  body.touch-device .service-card { cursor: pointer; }
   .service-card:first-child { grid-row: 1 / 3; }
 
   .service-bg {
@@ -637,8 +670,19 @@
   }
   .service-card:hover .service-bg { transform: scale(1.06); }
 
-  .service-bg { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
-
+/*
+  .bg-events    { background: radial-gradient(ellipse at 60% 40%, rgba(42,31,14,0.4) 0%, #0d0b08 70%), url('images/events.jpg') center/cover; }
+  .bg-portraits { background: radial-gradient(ellipse at 40% 60%, rgba(30,24,8,0.4) 0%, #0a0908 70%), url('images/portraits.jpg') center/cover; }
+  .bg-maternity { background: radial-gradient(ellipse at 50% 30%, rgba(26,21,16,0.4) 0%, #0c0b09 70%), url('images/maternity.jpg') center/cover; }
+  .bg-family    { background: radial-gradient(ellipse at 30% 70%, rgba(28,20,8,0.4) 0%, #0b0a08 70%), url('images/family.jpg') center/cover; }
+  .bg-newborn   { background: radial-gradient(ellipse at 70% 50%, rgba(33,26,13,0.4) 0%, #0d0c0a 70%), url('images/newborn.jpg') center/cover; } */
+  
+  .bg-events    { background: url('images/events.jpg') center/cover; }
+  .bg-portraits { background: url('images/portraits.jpg') center/cover; }
+  .bg-maternity { background: url('images/maternity.jpg') center/cover; }
+  .bg-family    { background: url('images/family.jpg') center/cover; }
+  .bg-newborn   { background: url('images/newborn.jpg') center/cover; }
+  
   .service-overlay {
     position: absolute;
     inset: 0;
@@ -1121,9 +1165,12 @@
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <nav>
   <div class="nav-logo" style="display: flex; flex-direction: row; align-items: center; gap: 14px;">
-    <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" decoding="async" style="height: 45px; width: auto; object-fit: contain;">
+    <img src="images/logo.jpeg" alt="Nirvana Photoworks Logo" style="height: 45px; width: auto; object-fit: contain;">
     <div style="display: flex; flex-direction: column; gap: 1px;">
       <div class="nav-logo-name">Nirvana</div>
       <div class="nav-logo-sub">Photoworks</div>
@@ -1154,7 +1201,7 @@
 
   <!-- NEW: Hero image fills the empty right space -->
   <div class="hero-image">
-    <img src="images/hero.jpg" alt="Nirvana Photoworks signature photography" fetchpriority="high" decoding="async">
+    <img src="images/hero.jpg" alt="Nirvana Photoworks signature photography">
   </div>
 
   <div class="hero-grain"></div>
@@ -1235,13 +1282,13 @@
   <div class="philosophy-visual reveal reveal-delay-1">
     <div class="photo-frame frame-a">
       <div class="frame-gold-accent"></div>
-      <img src="images/philosophy-main.jpg" loading="lazy" decoding="async" alt="Fine art signature photography" style="width:100%; height:100%; object-fit:cover;">
+      <img src="images/philosophy-main.jpg" alt="Fine art signature photography" style="width:100%; height:100%; object-fit:cover;">
       <div class="frame-number">01</div>
     </div>
 
     <div class="photo-frame frame-b">
       <div class="frame-b-accent"></div>
-      <img src="images/philosophy-secondary.jpg" loading="lazy" decoding="async" alt="Atmospheric fine art photography portrait" style="width:100%; height:100%; object-fit:cover;">
+      <img src="images/philosophy-secondary.jpg" alt="Atmospheric fine art photography portrait" style="width:100%; height:100%; object-fit:cover;">
     </div>
   </div>
 </section>
@@ -1255,7 +1302,7 @@
   <div class="services-grid">
 
     <a href="events.html" class="service-card">
-      <img class="service-bg" src="images/events.jpg" alt="" loading="lazy" decoding="async">
+      <div class="service-bg bg-events"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-deco-num">01</div>
@@ -1268,7 +1315,7 @@
     </a>
 
     <a href="portraits.html" class="service-card">
-      <img class="service-bg" src="images/portraits.jpg" alt="" loading="lazy" decoding="async">
+      <div class="service-bg bg-portraits"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1280,7 +1327,7 @@
     </a>
 
     <a href="maternity.html" class="service-card">
-      <img class="service-bg" src="images/maternity.jpg" alt="" loading="lazy" decoding="async">
+      <div class="service-bg bg-maternity"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1292,7 +1339,7 @@
     </a>
 
     <a href="family.html" class="service-card">
-      <img class="service-bg" src="images/family.jpg" alt="" loading="lazy" decoding="async">
+      <div class="service-bg bg-family"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1304,7 +1351,7 @@
     </a>
 
     <a href="newborn.html" class="service-card">
-      <img class="service-bg" src="images/newborn.jpg" alt="" loading="lazy" decoding="async">
+      <div class="service-bg bg-newborn"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1424,6 +1471,43 @@
 </a>
 
 <script>
+  // TOUCH DEVICE DETECTION — restores native UX on mobile
+  (function detectTouch() {
+    const isTouch = (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches
+    );
+    if (isTouch) {
+      document.body.classList.add('touch-device');
+      // Custom cursor elements are hidden via CSS (.touch-device)
+      // System cursor returns (cursor: auto on .touch-device)
+    }
+  })();
+
+  // 1. CUSTOM CURSOR TRACKING (desktop only)
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  if (cursor && ring && !document.body.classList.contains('touch-device')) {
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+  }
+
   // 2. SCROLL REVEAL (Intersection Observer)
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -1439,12 +1523,16 @@
 
   // 3. NAV BACKGROUND SHIFT
   const nav = document.querySelector('nav');
-  let navScrolled = false;
   window.addEventListener('scroll', () => {
-    const now = window.scrollY > 60;
-    if (now === navScrolled) return;
-    navScrolled = now;
-    nav.classList.toggle('scrolled', now);
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(8,8,8,0.96)';
+      nav.style.backdropFilter = 'blur(20px)';
+      nav.style.webkitBackdropFilter = 'blur(20px)';
+    } else {
+      nav.style.background = '';
+      nav.style.backdropFilter = '';
+      nav.style.webkitBackdropFilter = '';
+    }
   }, { passive: true });
 
   // 4. MOBILE MENU TOGGLE
