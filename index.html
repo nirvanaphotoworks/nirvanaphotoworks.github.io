@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#080808">
 <title>Nirvana Photoworks</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet">
 
 <style>
@@ -677,11 +679,13 @@
   .bg-family    { background: radial-gradient(ellipse at 30% 70%, rgba(28,20,8,0.4) 0%, #0b0a08 70%), url('images/family.jpg') center/cover; }
   .bg-newborn   { background: radial-gradient(ellipse at 70% 50%, rgba(33,26,13,0.4) 0%, #0d0c0a 70%), url('images/newborn.jpg') center/cover; } */
   
-  .bg-events    { background: url('images/events.jpg') center/cover; }
-  .bg-portraits { background: url('images/portraits.jpg') center/cover; }
-  .bg-maternity { background: url('images/maternity.jpg') center/cover; }
-  .bg-family    { background: url('images/family.jpg') center/cover; }
-  .bg-newborn   { background: url('images/newborn.jpg') center/cover; }
+  /* Gallery images are loaded by JavaScript only when The Work section is near the viewport. */
+  .bg-events, .bg-portraits, .bg-maternity, .bg-family, .bg-newborn {
+    background-color: #0d0b09;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   
   .service-overlay {
     position: absolute;
@@ -1201,7 +1205,7 @@
 
   <!-- NEW: Hero image fills the empty right space -->
   <div class="hero-image">
-    <img src="images/hero.jpg" alt="Nirvana Photoworks signature photography">
+    <img src="images/hero.jpg" alt="Nirvana Photoworks signature photography" fetchpriority="high" decoding="async">
   </div>
 
   <div class="hero-grain"></div>
@@ -1282,13 +1286,13 @@
   <div class="philosophy-visual reveal reveal-delay-1">
     <div class="photo-frame frame-a">
       <div class="frame-gold-accent"></div>
-      <img src="images/philosophy-main.jpg" alt="Fine art signature photography" style="width:100%; height:100%; object-fit:cover;">
+      <img src="images/philosophy-main.jpg" alt="Fine art signature photography" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;">
       <div class="frame-number">01</div>
     </div>
 
     <div class="photo-frame frame-b">
       <div class="frame-b-accent"></div>
-      <img src="images/philosophy-secondary.jpg" alt="Atmospheric fine art photography portrait" style="width:100%; height:100%; object-fit:cover;">
+      <img src="images/philosophy-secondary.jpg" alt="Atmospheric fine art photography portrait" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;">
     </div>
   </div>
 </section>
@@ -1301,8 +1305,8 @@
 
   <div class="services-grid">
 
-    <a href="events.html" class="service-card">
-      <div class="service-bg bg-events"></div>
+    <a href="events.html" class="service-card reveal" data-reveal-delay="0">
+      <div class="service-bg bg-events" data-bg="images/events.jpg"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-deco-num">01</div>
@@ -1314,8 +1318,8 @@
       </div>
     </a>
 
-    <a href="portraits.html" class="service-card">
-      <div class="service-bg bg-portraits"></div>
+    <a href="portraits.html" class="service-card reveal reveal-delay-1">
+      <div class="service-bg bg-portraits" data-bg="images/portraits.jpg"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1326,8 +1330,8 @@
       </div>
     </a>
 
-    <a href="maternity.html" class="service-card">
-      <div class="service-bg bg-maternity"></div>
+    <a href="maternity.html" class="service-card reveal reveal-delay-2">
+      <div class="service-bg bg-maternity" data-bg="images/maternity.jpg"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1338,8 +1342,8 @@
       </div>
     </a>
 
-    <a href="family.html" class="service-card">
-      <div class="service-bg bg-family"></div>
+    <a href="family.html" class="service-card reveal reveal-delay-3">
+      <div class="service-bg bg-family" data-bg="images/family.jpg"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1350,8 +1354,8 @@
       </div>
     </a>
 
-    <a href="newborn.html" class="service-card">
-      <div class="service-bg bg-newborn"></div>
+    <a href="newborn.html" class="service-card reveal reveal-delay-4">
+      <div class="service-bg bg-newborn" data-bg="images/newborn.jpg"></div>
       <div class="service-overlay"></div>
       <div class="service-bracket"></div>
       <div class="service-content">
@@ -1508,18 +1512,51 @@
     animateRing();
   }
 
-  // 2. SCROLL REVEAL (Intersection Observer)
+  // 2. SCROLL REVEAL + LAZY-LOAD THE WORK IMAGES
+  // The five gallery images are CSS backgrounds, so native loading="lazy" cannot be used.
+  // We wait until the section is close to the viewport, then load each image.
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08, rootMargin: '0px 0px 120px 0px' });
 
-  reveals.forEach(el => observer.observe(el));
+  reveals.forEach(el => revealObserver.observe(el));
+
+  const lazyGalleryImages = document.querySelectorAll('.service-bg[data-bg]');
+  const loadGalleryImage = (element) => {
+    const imageUrl = element.dataset.bg;
+    if (!imageUrl || element.dataset.loaded === 'true') return;
+
+    element.dataset.loaded = 'loading';
+    const image = new Image();
+
+    image.onload = () => {
+      element.style.backgroundImage = `url("${imageUrl}")`;
+      element.dataset.loaded = 'true';
+    };
+
+    image.onerror = () => {
+      element.dataset.loaded = 'error';
+    };
+
+    image.src = imageUrl;
+  };
+
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadGalleryImage(entry.target);
+        galleryObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '500px 0px 500px 0px', threshold: 0 });
+
+  lazyGalleryImages.forEach(image => galleryObserver.observe(image));
 
   // 3. NAV BACKGROUND SHIFT
   const nav = document.querySelector('nav');
